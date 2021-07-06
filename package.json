@@ -1,0 +1,17 @@
+{
+  "name": "osf-backend-academy",
+  "version": "0.0.1",
+  "description": "OSF Backend Academy Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app/index.js"
+  },
+  "author": "Rekechynsky Dmytro",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}
