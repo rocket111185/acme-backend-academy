@@ -102,6 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-# File, that holds a secret key, which no one can see...
-ultra-secret-do-not-open-otherwise-you-are-not-alive.txt

@@ -1,6 +1,8 @@
+'use strict';
+
 const userServices = require('../services/UserServices');
 
-function helloWorld(req, res, next){
+function helloWorld(req, res) {
     try {
         const returnFromService = userServices.helloWorld();
         return res.status(200).send(returnFromService);
@@ -9,11 +11,14 @@ function helloWorld(req, res, next){
     }
 }
 
-async function controllerWithParams(req, res, next){
+async function controllerWithParams(req, res) {
     try {
-        const {postId, email} = req.query;
-        
-        const returnFromService = await userServices.serviceThatCallsApi(postId, email);
+        const { postId, email } = req.query;
+
+        const returnFromService = await userServices.serviceThatCallsApi(
+            postId,
+            email
+        );
         return res.status(200).send(returnFromService);
     } catch (error) {
         console.log(error);
@@ -21,7 +26,6 @@ async function controllerWithParams(req, res, next){
 }
 
 module.exports = {
-    helloWorld: helloWorld,
-    controllerWithParams: controllerWithParams
-  }
-  
+    helloWorld,
+    controllerWithParams,
+};
