@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import css from "rollup-plugin-css-only";
 
 const isDev = Boolean(process.env.ROLLUP_WATCH);
 
@@ -17,12 +18,13 @@ export default [
             file: 'app/public/bundle.js',
         },
         plugins: [
+            css({ output: 'bundle.css' }),
             svelte({
                 compilerOptions: {
                     hydratable: true,
-                    css: (css) => {
-                        css.write('app/public/bundle.css');
-                    },
+                    // css: (css) => {
+                    //     css.write('app/public/bundle.css');
+                    // },
                 },
             }),
             resolve(),
@@ -48,6 +50,7 @@ export default [
             file: 'app/public/App.js',
         },
         plugins: [
+            css({ output: 'bundle.css' }),
             svelte({
                 compilerOptions: {
                     generate: 'ssr',

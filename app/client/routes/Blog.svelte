@@ -2,6 +2,10 @@
   import { Router, Link, Route } from "svelte-routing";
 </script>
 
+<svelte:head>
+  <title>Blog</title>
+</svelte:head>
+
 <Router>
   <h1>Blog</h1>
 

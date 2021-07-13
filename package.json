@@ -4,12 +4,12 @@
     "description": "OSF Backend Academy Project",
     "main": "index.js",
     "scripts": {
-        "build": "npx rollup -c",
+        "build": "rollup -c",
         "lint": "find . -path ./node_modules -prune -false -o -name '*.js' -o -name '*.json' | xargs -I{} npx prettier -w --check {} && npx eslint --fix .",
-        "watch": "npx rollup -c -w",
-        "server": "npx nodemon app/index.js --watch app/index.js --watch app/public/App.js",
-        "start": "npx run-p watch server",
-        "test": "npx jest"
+        "watch": "rollup -c -w",
+        "server": "nodemon app/index.js --watch app/index.js --watch app/public/App.js",
+        "start": "run-p watch server",
+        "test": "jest"
     },
     "author": "Rekechynsky Dmytro",
     "license": "MIT",
@@ -23,15 +23,19 @@
         "rollup-plugin-livereload": "^2.0.0",
         "rollup-plugin-svelte": "~7.0.0",
         "rollup-plugin-terser": "^7.0.2",
+        "run-p": "^0.0.0",
         "sirv-cli": "^1.0.10",
         "svelte": "^3.31.1",
-        "svelte-routing": "^1.6.0"
+        "svelte-routing": "^1.6.0",
+        "sveltestrap": "^5.4.0",
+        "watch": "^0.13.0"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^17.0.0",
         "@rollup/plugin-node-resolve": "^11.0.0",
         "eslint": "^7.30.0",
         "jest": "^27.0.6",
-        "prettier": "^2.3.2"
+        "prettier": "^2.3.2",
+        "rollup-plugin-css-only": "^3.1.0"
     }
 }
