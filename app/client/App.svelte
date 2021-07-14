@@ -1,5 +1,5 @@
 <script>
-  import { Router, Route } from "svelte-routing";
+  import { Router, Route } from 'svelte-routing';
   import {
     Collapse,
     Navbar,
@@ -8,14 +8,14 @@
     Nav,
     NavItem,
     NavLink,
-  } from 'sveltestrap';
-  import RouterLink from "./components/NavLink.svelte";
-  import Home from "./routes/Home.svelte";
-  import About from "./routes/About.svelte";
-  import Blog from "./routes/Blog.svelte";
+  } from 'sveltestrap/src';
+  import RouterLink from './components/NavLink.svelte';
+  import Home from './routes/Home.svelte';
+  import About from './routes/About.svelte';
+  import Blog from './routes/Blog.svelte';
 
   // Used for SSR. A falsy value is ignored by the Router.
-  export let url = "";
+  export let url = '/';
 
   let isOpen = false;
 
@@ -24,18 +24,13 @@
   }
 </script>
 
-<svelte:head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
-</svelte:head>
-
 <Router url="{url}">
-  <Navbar color="light" light expand="md">
+  <Navbar color="light" light expand="sm">
     <NavbarBrand>
-      <RouterLink to="/">OSF Project</RouterLink>
+      <RouterLink color="primary" to="/">OSF Project</RouterLink>
     </NavbarBrand>
     <NavbarToggler on:click={() => (isOpen = !isOpen)} />
-    <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
+    <Collapse {isOpen} navbar expand="sm" on:update={handleUpdate}>
       <Nav class="ms-auto" navbar>
         <NavItem>
           <NavLink>
@@ -50,16 +45,10 @@
       </Nav>
     </Collapse>
   </Navbar>
-  <!--
-  <nav>
-    <NavLink to="/">Home</NavLink>
-    <NavLink to="about">About</NavLink>
-    <NavLink to="blog">Blog</NavLink>
-  </nav>
-  -->
   <div>
     <Route path="about" component="{About}" />
     <Route path="blog/*" component="{Blog}" />
     <Route path="/" component="{Home}" />
   </div>
+  The link is {url}
 </Router>

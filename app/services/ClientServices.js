@@ -7,9 +7,16 @@ function renderPage(url) {
 
     return `
         <!DOCTYPE html>
-        <link rel='stylesheet' href='/bundle.css'>
-        <div id="app">${html}</div>
-        <script src="/bundle.js"></script>
+        <head>
+            <meta charset="utf-8">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+            <link rel='stylesheet' href='/bundle.css'>
+        </head>
+        <body>
+            <div id="app">${html}</div>
+            <script src="/bundle.js"></script>
+        </body>
+        </html>
     `;
 }
 

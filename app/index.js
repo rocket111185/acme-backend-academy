@@ -1,7 +1,8 @@
 'use strict';
 
-const app = require('express')();
+require('dotenv').config();
 
+const app = require('express')();
 require('./routes')(app);
 
 const PORT = process.env.PORT || 3000;
