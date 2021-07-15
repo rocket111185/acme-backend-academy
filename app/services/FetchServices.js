@@ -9,7 +9,7 @@ async function wrappedAxios(parameters) {
     try {
         const response = await axios(parameters);
         return response.data;
-    } catch(error) {
+    } catch (error) {
         return error?.response?.data;
     }
 }
@@ -28,15 +28,15 @@ function checkProperties(propertyList) {
     }
 }
 
-
 // Fetching functions
 
 async function fetchCategory(categoryId) {
     checkProperties({ categoryId });
 
-    const url = (categoryId.toLowerCase() === 'all') ?
-        '/categories' :
-        `/categories/${categoryId}`;
+    const url =
+        categoryId.toLowerCase() === 'all' ?
+            '/categories' :
+            `/categories/${categoryId}`;
 
     const response = await wrappedAxios({
         method: 'get',
@@ -62,3 +62,41 @@ async function fetchChildCategories(parentId = ROOT_CATEGORY) {
 
     return response;
 }
+
+async function fetchProduct(productId) {
+    checkProperties({ productId });
+
+    const response = await wrappedAxios({
+        method: 'get',
+        url: '/products/product_search',
+        params: {
+            secretKey: SECRET_KEY,
+            id: productId,
+        },
+    });
+
+    return response;
+}
+
+async function fetchProductList(categoryId, pageNumber = '1') {
+    checkProperties({ categoryId, pageNumber });
+
+    const response = await wrappedAxios({
+        method: 'get',
+        url: '/products/product_search',
+        params: {
+            secretKey: SECRET_KEY,
+            primary_category_id: categoryId,
+            page: pageNumber,
+        },
+    });
+
+    return response;
+}
+
+module.exports = {
+    fetchCategory,
+    fetchChildCategories,
+    fetchProduct,
+    fetchProductList
+};

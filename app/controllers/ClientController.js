@@ -1,17 +1,26 @@
 'use strict';
 
-const ClientServices = require('../services/ClientServices');
+const FetchServices = require('../services/FetchServices');
 
-function renderPage(req, res) {
+async function MainPage(req, res) {
     try {
-        const page = ClientServices.renderPage(req.url);
-        res.write(page);
-        res.end();
+        // Fetch smth
+        res.render(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function CategoryPage(req, res) {
+    try {
+        // Fetch smth
+        res.render(data);
     } catch (error) {
         console.log(error);
     }
 }
 
 module.exports = {
-    renderPage
+    MainPage,
+    CategoryPage
 };
