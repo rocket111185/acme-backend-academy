@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "lint": "find . -path ./node_modules -prune -false -o -name '*.js' -o -name '*.json' | xargs -I{} npx prettier -w --check {} && npx eslint --fix .",
-        "start": "nodemon app/index.js --watch app/index.js",
+        "start": "nodemon index.js --watch index.js",
         "test": "jest"
     },
     "author": "Rekechynsky Dmytro",

@@ -4,8 +4,11 @@ const FetchServices = require('../services/FetchServices');
 
 async function MainPage(req, res) {
     try {
-        // Fetch smth
-        res.render(data);
+        const header = await FetchServices.fetchChildCategories();
+        console.log({ header });
+        res.render('home', {
+            header,
+        });
     } catch (error) {
         console.log(error);
     }
@@ -13,8 +16,8 @@ async function MainPage(req, res) {
 
 async function CategoryPage(req, res) {
     try {
-        // Fetch smth
-        res.render(data);
+        const header = await FetchServices.fetchChildCategories();
+        res.render('catecory');
     } catch (error) {
         console.log(error);
     }

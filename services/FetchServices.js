@@ -100,3 +100,8 @@ module.exports = {
     fetchProduct,
     fetchProductList
 };
+
+(async () => {
+    const data = await fetchChildCategories();
+    console.log(data);
+})();
