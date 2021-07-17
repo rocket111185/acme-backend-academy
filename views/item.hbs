@@ -1,0 +1,50 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/category/{{category.id}}">{{category.name}}</a></li>
+        <li class="breadcrumb-item"><a href="/item/{{item.id}}">{{item.name}}</a></li>
+    </ol>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            {{#with item}}
+                {{> carousel}}
+            {{/with}}
+        </div>
+        <div class="col-md-6">
+            <h5 class="mt-2">{{item.page_title}}</h5>
+            <p>{{item.short_description}}</p>
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <a href="#" class="btn btn-primary
+                    {{#unless item.orderable}} disabled" aria-disabled="true"{{else}}"{{/unless}}
+                    {{!-- There's workaround below for incorrect syntax highlighting--}} 
+                    {{#if false}}"{{/if}}>
+                        Buy Now
+                    </a>
+                </div>
+                <div class="col-6">
+                    Price: {{item.price}}
+                    <!--
+                    <div class="form-group">
+                        <select class="dropdown" id="currency" class="form-control" data-role="select-dropdown" data-profile="minimal">
+                            <option value="">{{item.currency}}</option>
+                        </select>
+                    </div>
+                    -->
+                    <div class="btn-group">
+                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                            {{item.currency}} <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item">{{item.currency}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

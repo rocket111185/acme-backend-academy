@@ -1,0 +1,21 @@
+{{#with currentCategory}}
+    {{> breadcumb}}
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">{{page_title}}</h1>
+        <p class="lead">{{page_description}}</p>
+    </div>
+{{/with}}
+
+    <h2>Subcategories</h2>
+
+    {{#each childCategories}}
+        <div class="card mb-4">
+            <img class="card-img-top" src="/images/{{this.image}}" alt="{{this.id}}">
+            <div class="card-body">
+                <p class="card-text">{{this.page_description}}</p>
+                <a href="/category/{{this.id}}" class="btn btn-primary">View products</a>
+            </div>
+        </div>
+    {{/each}}
+</div>

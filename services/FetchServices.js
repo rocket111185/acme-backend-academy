@@ -1,7 +1,9 @@
 'use strict';
 
+const { SECRET_KEY, ROOT_CATEGORY, API_URL } = require('../config.js');
+
 const axios = require('axios').create({
-    baseURL: 'https://osf-digital-backend-academy.herokuapp.com/api/',
+    baseURL: API_URL,
 });
 
 // So that, it doesn't throw errors for unsuccessful queries
@@ -10,12 +12,13 @@ async function wrappedAxios(parameters) {
         const response = await axios(parameters);
         return response.data;
     } catch (error) {
-        return error?.response?.data;
+        return (
+            error?.response?.data || {
+                error: error.code,
+            }
+        );
     }
 }
-
-const ROOT_CATEGORY = 'root';
-const { SECRET_KEY } = process.env;
 
 // The function accepts object with values
 // and checks whether they are non-empty strings
@@ -75,7 +78,8 @@ async function fetchProduct(productId) {
         },
     });
 
-    return response;
+    // The query returns an array, but we must return an element
+    return response[0];
 }
 
 async function fetchProductList(categoryId, pageNumber = '1') {
@@ -98,10 +102,5 @@ module.exports = {
     fetchCategory,
     fetchChildCategories,
     fetchProduct,
-    fetchProductList
+    fetchProductList,
 };
-
-(async () => {
-    const data = await fetchChildCategories();
-    console.log(data);
-})();

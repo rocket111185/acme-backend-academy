@@ -1,25 +1,27 @@
 {
     "name": "osf-backend-academy",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "OSF Backend Academy Project",
     "main": "index.js",
     "scripts": {
+        "dev": "nodemon index.js --watch index.js",
         "lint": "find . -path ./node_modules -prune -false -o -name '*.js' -o -name '*.json' | xargs -I{} npx prettier -w --check {} && npx eslint --fix .",
-        "start": "nodemon index.js --watch index.js",
+        "start": "node index.js",
         "test": "jest"
     },
     "author": "Rekechynsky Dmytro",
     "license": "MIT",
     "dependencies": {
         "axios": "^0.21.1",
+        "currency-symbol-map": "^5.0.1",
         "express": "^4.17.1",
-        "express-handlebars": "^5.3.2",
-        "nodemon": "^2.0.4",
-        "watch": "^0.13.0"
+        "express-handlebars": "^5.3.2"
     },
     "devDependencies": {
         "eslint": "^7.30.0",
         "jest": "^27.0.6",
-        "prettier": "^2.3.2"
+        "nodemon": "^2.0.4",
+        "prettier": "^2.3.2",
+        "watch": "^0.13.0"
     }
 }

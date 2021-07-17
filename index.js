@@ -1,16 +1,19 @@
 'use strict';
 
-const path = require('path');
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
+const helpers = require('./services/RenderServices.js');
 
 app.use(express.static('public'));
 
-app.engine('hbs', handlebars({
+const hbs = handlebars.create({
     defaultLayout: 'main',
-    extname: '.hbs'
-}));
+    extname: '.hbs',
+    helpers,
+});
+
+app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 require('./routes')(app);
