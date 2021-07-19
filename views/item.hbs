@@ -1,0 +1,42 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/category/{{category.id}}">{{category.name}}</a></li>
+        <li class="breadcrumb-item"><a href="/item/{{id}}">{{item.name}}</a></li>
+    </ol>
+</nav>
+
+{{#with item}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {{> carousel}}
+            </div>
+            <div class="col-md-6">
+                <h5 class="mt-2">{{page_title}}</h5>
+                <p>{{{long_description}}}</p>
+                <div class="row justify-content-between">
+                    <div class="col-6">
+                        <a href="#" class="btn btn-primary
+                        {{#unless orderable}} disabled" aria-disabled="true"{{else}}"{{/unless}}
+                        {{!-- There's workaround below for incorrect syntax highlighting--}} 
+                        {{#if false}}"{{/if}}>
+                            Buy Now
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        Price: {{price}}
+                        <div class="btn-group">
+                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                {{currency}} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item">{{currency}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/with}}
