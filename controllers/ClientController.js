@@ -5,17 +5,17 @@ const FetchServices = require('../services/FetchServices');
 async function MainPage(req, res) {
     try {
         const header = await FetchServices.fetchChildCategories();
+        const { error } = header;
 
-        if (header.error) {
-            const { error } = header;
-            res.render('error', {
+        if (error) {
+            return res.render('error', {
                 error,
             });
-        } else {
-            res.render('home', {
-                header,
-            });
         }
+
+        res.render('home', {
+            header,
+        });
     } catch (error) {
         console.log(error);
     }
@@ -28,28 +28,26 @@ async function CategoryPage(req, res) {
         const childCategories = await FetchServices.fetchChildCategories(
             categoryName
         );
+        const { error } = childCategories;
 
-        if (childCategories.error) {
-            const { error } = childCategories;
-            res.render('error', {
+        if (error) {
+            return res.render('error', {
                 error,
             });
-        } else {
-            if (!childCategories.length) {
-                res.redirect(`itemlist/${categoryName}`);
-            }
-
-            const header = await FetchServices.fetchChildCategories();
-            const currentCategory = await FetchServices.fetchCategory(
-                categoryName
-            );
-
-            res.render('category', {
-                header,
-                currentCategory,
-                childCategories,
-            });
         }
+
+        if (!childCategories.length) {
+            return res.redirect(`itemlist/${categoryName}`);
+        }
+
+        const header = await FetchServices.fetchChildCategories();
+        const currentCategory = await FetchServices.fetchCategory(categoryName);
+
+        res.render('category', {
+            header,
+            currentCategory,
+            childCategories,
+        });
     } catch (error) {
         console.log(error);
     }
@@ -64,24 +62,27 @@ async function ItemListPage(req, res) {
             categoryName,
             pageNumber
         );
+        const { error } = itemlist;
 
-        if (itemlist.error) {
-            const { error } = itemlist;
-            res.render('error', {
+        if (error) {
+            return res.render('error', {
                 error,
-            });
-        } else {
-            const header = await FetchServices.fetchChildCategories();
-            const currentCategory = await FetchServices.fetchCategory(
-                categoryName
-            );
-
-            res.render('itemlist', {
-                header,
-                currentCategory,
-                itemlist,
+                reasons: [
+                    'There are no products for this category',
+                    `There is no category ${categoryName}`,
+                    'The Internet connection is unstable',
+                ],
             });
         }
+
+        const header = await FetchServices.fetchChildCategories();
+        const currentCategory = await FetchServices.fetchCategory(categoryName);
+
+        res.render('itemlist', {
+            header,
+            currentCategory,
+            itemlist,
+        });
     } catch (error) {
         console.log(error);
     }
@@ -92,24 +93,28 @@ async function ItemPage(req, res) {
         const itemId = req.params.id;
 
         const item = await FetchServices.fetchProduct(itemId);
+        const { error } = item;
 
-        if (item.error) {
-            const { error } = item;
-            res.render('error', {
+        if (error) {
+            return res.render('error', {
                 error,
-            });
-        } else {
-            const category = await FetchServices.fetchCategory(
-                item.primary_category_id
-            );
-            const header = await FetchServices.fetchChildCategories();
-
-            res.render('item', {
-                header,
-                category,
-                item,
+                reasons: [
+                    `There is no item with id "${itemId}"`,
+                    'The Internet connection is unstable',
+                ],
             });
         }
+
+        const category = await FetchServices.fetchCategory(
+            item.primary_category_id
+        );
+        const header = await FetchServices.fetchChildCategories();
+
+        res.render('item', {
+            header,
+            category,
+            item,
+        });
     } catch (error) {
         console.log(error);
     }

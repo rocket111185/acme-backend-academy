@@ -1,15 +1,19 @@
 'use strict';
 
-// Get the container element
-const btnContainer = document.getElementById('topnav');
-const btns = btnContainer.getElementsByClassName('btn');
+// Get the navbar elements
+const links = document.querySelectorAll('.navbar-nav li a');
+const { URL } = document;
 
-for (let i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('click', function() {
-        const current = document.getElementsByClassName('active');
-        if (current.length > 0) {
-            current[0].className = current[0].className.replace(' active', '');
-        }
-        this.className += ' active';
-    });
+for (const link of links) {
+    console.log(link);
+    // The id is the last word in path
+    const id = link.href.split('/').pop();
+    // The URL is broken into separate words
+    // either by slash or minus
+    if (URL.split(/[/-]/).includes(id)) {
+        link.style.color = 'red';
+    }
 }
+
+// This works only if the category ID
+// is included into link

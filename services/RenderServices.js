@@ -11,8 +11,14 @@ const findPicture = (imageGroup, size) =>
 const findAllPictures = (imageGroup, size) =>
     imageGroup.find((el) => el.view_type === size).images;
 
+const isActiveCatButton = (categoryId, buttonId) => {
+    console.log({categoryId, buttonId});
+    categoryId.includes(buttonId);
+}
+
 module.exports = {
     getCurrencySymbol,
     findPicture,
     findAllPictures,
+    isActiveCatButton,
 };

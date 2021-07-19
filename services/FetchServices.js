@@ -12,11 +12,14 @@ async function wrappedAxios(parameters) {
         const response = await axios(parameters);
         return response.data;
     } catch (error) {
-        return (
-            error?.response?.data || {
-                error: error.code,
-            }
-        );
+        const { response } = error;
+        if (response?.data) {
+            return response.data;
+        } else {
+            return {
+                error: response?.statusText || error.code,
+            };
+        }
     }
 }
 
@@ -79,7 +82,7 @@ async function fetchProduct(productId) {
     });
 
     // The query returns an array, but we must return an element
-    return response[0];
+    return response.error ? response : response[0];
 }
 
 async function fetchProductList(categoryId, pageNumber = '1') {

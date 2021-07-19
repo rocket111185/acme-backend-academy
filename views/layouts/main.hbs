@@ -9,7 +9,6 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <!-- Body Content will render here -->
     {{> header}}
 
     <div class="wrapper flex-grow-1">
@@ -20,13 +19,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script>
-        $(".dropdown-menu li").click(function() {
-          const selectedText = $(this).text();
-          $(this).parents('.btn-group').find('.dropdown-toggle')
-            .html(selectedText + ' <span class="caret"></span>');
-        });
-    </script>
+    <script src="/javascripts/change-dropdown-label.js"></script>
+    <script src="/javascripts/active-cat-button.js"></script>
 </body>
 </html>
 

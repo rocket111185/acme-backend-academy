@@ -4,14 +4,16 @@
     "description": "OSF Backend Academy Project",
     "main": "index.js",
     "scripts": {
-        "dev": "nodemon index.js --watch index.js",
+        "dev": "nodemon index.js -w index.js -w controllers -w routes -w services",
         "lint": "find . -path ./node_modules -prune -false -o -name '*.js' -o -name '*.json' | xargs -I{} npx prettier -w --check {} && npx eslint --fix .",
-        "start": "node index.js",
+        "start": "NODE_ENV=production SECRET_KEY=$SECRET_KEY node index.js",
         "test": "jest"
     },
     "author": "Rekechynsky Dmytro",
     "license": "MIT",
     "dependencies": {
+        "@sentry/node": "^6.9.0",
+        "@sentry/tracing": "^6.9.0",
         "axios": "^0.21.1",
         "currency-symbol-map": "^5.0.1",
         "express": "^4.17.1",
