@@ -5,7 +5,6 @@ const links = document.querySelectorAll('.navbar-nav li a');
 const { URL } = document;
 
 for (const link of links) {
-    console.log(link);
     // The id is the last word in path
     const id = link.href.split('/').pop();
     // The URL is broken into separate words

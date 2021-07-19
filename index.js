@@ -7,18 +7,15 @@ const helpers = require('./services/RenderServices.js');
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 
-const {
-    SENTRY_KEY,
-    SENTRY_PROJECT_ID,
-} = require('./config.js');
+const { SENTRY_KEY, SENTRY_PROJECT_ID } = require('./config.js');
 
 Sentry.init({
-  dsn: `https://${SENTRY_KEY}.sentry.io/${SENTRY_PROJECT_ID}`,
-  integrations: [
-    new Sentry.Integrations.Http({ tracing: true }),
-    new Tracing.Integrations.Express({ app }),
-  ],
-  tracesSampleRate: 1.0,
+    dsn: `https://${SENTRY_KEY}.sentry.io/${SENTRY_PROJECT_ID}`,
+    integrations: [
+        new Sentry.Integrations.Http({ tracing: true }),
+        new Tracing.Integrations.Express({ app }),
+    ],
+    tracesSampleRate: 1.0,
 });
 
 app.use(Sentry.Handlers.requestHandler());
