@@ -2,21 +2,26 @@
 
 const getSymbolFromCurrency = require('currency-symbol-map');
 
-const getCurrencySymbol = (symbol) => getSymbolFromCurrency(symbol);
+const findPicture = (imageGroup, size) => {
+    const foundImageObject = imageGroup.find(
+        (el) => el.view_type === size && !el.variation_value
+    );
+    if (foundImageObject) {
+        return foundImageObject.images[0];
+    }
+};
 
-const findPicture = (imageGroup, size) =>
-    imageGroup.find((el) => el.view_type === size && !el.variation_value)
-        .images[0];
-
-const findAllPictures = (imageGroup, size) =>
-    imageGroup.find((el) => el.view_type === size).images;
-
-const isActiveCatButton = (categoryId, buttonId) =>
-    categoryId.includes(buttonId);
+const findAllPictures = (imageGroup, size) => {
+    const foundImageObjects = imageGroup.filter((el) => el.view_type === size);
+    const preparedImageCollection = foundImageObjects.reduce(
+        (acc, val) => [...acc, ...val.images],
+        []
+    );
+    return preparedImageCollection;
+};
 
 module.exports = {
-    getCurrencySymbol,
+    getSymbolFromCurrency,
     findPicture,
     findAllPictures,
-    isActiveCatButton,
 };

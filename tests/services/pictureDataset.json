@@ -1,0 +1,80 @@
+[
+    {
+        "images": [
+            {
+                "title": "large-no-var1"
+            },
+            {
+                "title": "large-no-var2"
+            }
+        ],
+        "view_type": "large"
+    },
+    {
+        "images": [
+            {
+                "title": "large-var1"
+            },
+            {
+                "title": "large-var2"
+            }
+        ],
+        "variation_value": "JJ6JUXX",
+        "view_type": "large"
+    },
+    {
+        "images": [
+            {
+                "title": "medium-no-var1"
+            },
+            {
+                "title": "medium-no-var2"
+            }
+        ],
+        "view_type": "medium"
+    },
+    {
+        "images": [
+            {
+                "title": "medium-var1"
+            },
+            {
+                "title": "medium-var2"
+            }
+        ],
+        "variation_value": "JJ6JUXX",
+        "view_type": "medium"
+    },
+    {
+        "images": [
+            {
+                "title": "small-no-var1"
+            },
+            {
+                "title": "small-no-var2"
+            }
+        ],
+        "view_type": "small"
+    },
+    {
+        "images": [
+            {
+                "title": "small-var1"
+            },
+            {
+                "title": "small-var2"
+            }
+        ],
+        "variation_value": "JJ6JUXX",
+        "view_type": "small"
+    },
+    {
+        "images": [
+            {
+                "title": "swatch-var1"
+            }
+        ],
+        "variation_value": "JJ6JUXX",
+        "view_type": "swatch"
+    }
+]
