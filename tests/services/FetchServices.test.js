@@ -15,14 +15,12 @@ describe('fetchCategory testing', () => {
             const fetchedCategoryList = await FetchServices.fetchCategory(
                 'all'
             );
-            for (const category of fetchedCategoryList) {
-                const fetchedCategory = await FetchServices.fetchCategory(
-                    category.id
-                );
-                expect(category).toEqual(fetchedCategory);
-            }
-        },
-        JEST_EXTENDED_TIMEOUT
+            const category = fetchedCategoryList.pop();
+            const fetchedCategory = await FetchServices.fetchCategory(
+                category.id
+            );
+            expect(category).toEqual(fetchedCategory);
+        }
     );
 
     test('it returns object with error for unexisting category', async () => {
@@ -35,8 +33,9 @@ describe('fetchCategory testing', () => {
         const irregularArgumentList = [69, false, null, undefined, {}, []];
         for (const argument of irregularArgumentList) {
             // The async version of "expect.toThrow"
-            await expect(FetchServices.fetchCategory(argument))
-                .rejects.toBeDefined();
+            await expect(
+                FetchServices.fetchCategory(argument)
+            ).rejects.toBeDefined();
         }
     });
 });
@@ -69,8 +68,9 @@ describe('fetchChildCategories testing', () => {
         const irregularArgumentList = [69, false, null, {}, []];
         for (const argument of irregularArgumentList) {
             // The async version of "expect.toThrow"
-            await expect(FetchServices.fetchChildCategories(argument))
-                .rejects.toBeDefined();
+            await expect(
+                FetchServices.fetchChildCategories(argument)
+            ).rejects.toBeDefined();
         }
     });
 });
@@ -104,10 +104,12 @@ describe('fetchProduct and fetchProductList testing', () => {
         const irregularArgumentList = [69, false, null, {}, []];
         for (const argument of irregularArgumentList) {
             // The async version of "expect.toThrow"
-            await expect(FetchServices.fetchProduct(argument))
-                .rejects.toBeDefined();
-            await expect(FetchServices.fetchProductList(argument, argument))
-                .rejects.toBeDefined();
+            await expect(
+                FetchServices.fetchProduct(argument)
+            ).rejects.toBeDefined();
+            await expect(
+                FetchServices.fetchProductList(argument, argument)
+            ).rejects.toBeDefined();
         }
     });
 });

@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
-const helpers = require('./services/RenderServices.js');
+const helpers = require('./helpers');
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 

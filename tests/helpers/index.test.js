@@ -1,6 +1,6 @@
 'use strict';
 
-const RenderServices = require('../../services/RenderServices.js');
+const RenderServices = require('../../helpers');
 const pictureDataset = require('./pictureDataset.json');
 
 describe('getSymbolFromCurrency testing', () => {

@@ -69,7 +69,7 @@ async function ItemListPage(req, res) {
                 error,
                 reasons: [
                     'There are no products for this category',
-                    `There is no category ${categoryName}`,
+                    `There is no category "${categoryName}"`,
                     'The Internet connection is unstable',
                 ],
             });
