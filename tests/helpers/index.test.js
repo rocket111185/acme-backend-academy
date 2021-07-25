@@ -1,19 +1,19 @@
 'use strict';
 
-const RenderServices = require('../../helpers');
+const helpers = require('../../helpers');
 const pictureDataset = require('./pictureDataset.json');
 
 describe('getSymbolFromCurrency testing', () => {
     test('it returns the symbol for "USD"', () => {
         const currency = 'USD';
-        const result = RenderServices.getSymbolFromCurrency(currency);
+        const result = helpers.getSymbolFromCurrency(currency);
 
         expect(result).toBe('$');
     });
 
     test('it returns the symbol for "EUR"', () => {
         const currency = 'EUR';
-        const result = RenderServices.getSymbolFromCurrency(currency);
+        const result = helpers.getSymbolFromCurrency(currency);
 
         expect(result).toBe('€');
     });
@@ -21,14 +21,14 @@ describe('getSymbolFromCurrency testing', () => {
     // The developer is from Ukraine
     test('it returns the symbol for "UAH"', () => {
         const currency = 'UAH';
-        const result = RenderServices.getSymbolFromCurrency(currency);
+        const result = helpers.getSymbolFromCurrency(currency);
 
         expect(result).toBe('₴');
     });
 
     test('it returns undefined for "foo"', () => {
         const currency = 'foo';
-        const result = RenderServices.getSymbolFromCurrency(currency);
+        const result = helpers.getSymbolFromCurrency(currency);
 
         expect(result).toBeUndefined();
     });
@@ -39,23 +39,20 @@ describe('findPicture testing', () => {
         const sizeList = ['large', 'medium', 'small'];
 
         for (const size of sizeList) {
-            const picObject = RenderServices.findPicture(pictureDataset, size);
-
-            expect(picObject).toEqual({
-                title: `${size}-no-var1`,
-            });
+            const picObject = helpers.findPicture(pictureDataset, size);
+            expect(picObject).toHaveProperty('title');
         }
     });
 
     test('it returns undefined for existing size with variation', () => {
         const size = 'swatch';
-        const picObject = RenderServices.findPicture(pictureDataset, size);
+        const picObject = helpers.findPicture(pictureDataset, size);
         expect(picObject).toBeUndefined();
     });
 
     test('it returns undefined for size that does not exist', () => {
         const size = 'extremally_large';
-        const picObject = RenderServices.findPicture(pictureDataset, size);
+        const picObject = helpers.findPicture(pictureDataset, size);
         expect(picObject).toBeUndefined();
     });
 });
@@ -65,41 +62,36 @@ describe('findAllPictures testing', () => {
         const sizeList = ['large', 'medium', 'small'];
 
         for (const size of sizeList) {
-            const picObject = RenderServices.findAllPictures(
-                pictureDataset,
-                size
-            );
+            const picObject = helpers.findAllPictures(pictureDataset, size);
 
-            expect(picObject).toEqual([
-                {
-                    title: `${size}-no-var1`,
-                },
-                {
-                    title: `${size}-no-var2`,
-                },
-                {
-                    title: `${size}-var1`,
-                },
-                {
-                    title: `${size}-var2`,
-                },
-            ]);
+            const expectedElement = [
+                expect.objectContaining({
+                    title: expect.any(String),
+                }),
+            ];
+            const expected = expect.arrayContaining(expectedElement);
+
+            expect(picObject).toEqual(expected);
         }
     });
 
     test('it returns array for existing size with variation', () => {
         const size = 'swatch';
-        const picObject = RenderServices.findAllPictures(pictureDataset, size);
-        expect(picObject).toEqual([
-            {
-                title: `${size}-var1`,
-            },
-        ]);
+        const picObject = helpers.findAllPictures(pictureDataset, size);
+
+        const expectedElement = [
+            expect.objectContaining({
+                title: expect.any(String),
+            }),
+        ];
+        const expected = expect.arrayContaining(expectedElement);
+
+        expect(picObject).toEqual(expected);
     });
 
     test('it returns empty array for size that does not exist', () => {
         const size = 'extremally_large';
-        const picObject = RenderServices.findAllPictures(pictureDataset, size);
+        const picObject = helpers.findAllPictures(pictureDataset, size);
         expect(picObject).toEqual([]);
     });
 });

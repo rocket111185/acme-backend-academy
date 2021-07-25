@@ -26,7 +26,9 @@ async function ItemListPage(req, res) {
         }
 
         const header = await CategoryServices.fetchChildCategories();
-        const currentCategory = await CategoryServices.fetchCategory(categoryName);
+        const currentCategory = await CategoryServices.fetchCategory(
+            categoryName
+        );
 
         res.render('itemlist', {
             header,

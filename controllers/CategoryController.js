@@ -6,23 +6,30 @@ async function CategoryPage(req, res) {
     try {
         const categoryName = req.params.id;
 
-        const childCategories = await CategoryServices.fetchChildCategories(
+        const currentCategory = await CategoryServices.fetchCategory(
             categoryName
         );
-        const { error } = childCategories;
+        const { error } = currentCategory;
 
         if (error) {
             return res.render('error', {
                 error,
+                reasons: [
+                    `There is no category "${categoryName}"`,
+                    'The Internet connection is unstable',
+                ],
             });
         }
+
+        const childCategories = await CategoryServices.fetchChildCategories(
+            categoryName
+        );
 
         if (!childCategories.length) {
             return res.redirect(`itemlist/${categoryName}`);
         }
 
         const header = await CategoryServices.fetchChildCategories();
-        const currentCategory = await CategoryServices.fetchCategory(categoryName);
 
         res.render('category', {
             header,

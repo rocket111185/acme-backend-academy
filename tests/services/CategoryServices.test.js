@@ -6,22 +6,19 @@ const { UNEXISTING_CATEGORY } = require('../config.js');
 describe('fetchCategory testing', () => {
     test('it returns all the categories for "all"', async () => {
         const fetchedCategoryList = await CategoryServices.fetchCategory('all');
-        expect(fetchedCategoryList).not.toHaveLength(0);
+        const expectedElement = [expect.any(Object)];
+        const expected = expect.arrayContaining(expectedElement);
+        expect(fetchedCategoryList).toEqual(expected);
     });
 
-    test(
-        'it returns the item for a category from list of "all"',
-        async () => {
-            const fetchedCategoryList = await CategoryServices.fetchCategory(
-                'all'
-            );
-            const category = fetchedCategoryList.pop();
-            const fetchedCategory = await CategoryServices.fetchCategory(
-                category.id
-            );
-            expect(category).toEqual(fetchedCategory);
-        }
-    );
+    test('it returns the item for a category from list of "all"', async () => {
+        const fetchedCategoryList = await CategoryServices.fetchCategory('all');
+        const category = fetchedCategoryList.pop();
+        const fetchedCategory = await CategoryServices.fetchCategory(
+            category.id
+        );
+        expect(category).toEqual(fetchedCategory);
+    });
 
     test('it returns object with error for unexisting category', async () => {
         const category = UNEXISTING_CATEGORY;
@@ -43,7 +40,9 @@ describe('fetchCategory testing', () => {
 describe('fetchChildCategories testing', () => {
     test('it returns main categories if no argument is passed', async () => {
         const rootCategories = await CategoryServices.fetchChildCategories();
-        expect(rootCategories).not.toHaveLength(0);
+        const expectedElement = [expect.any(Object)];
+        const expected = expect.arrayContaining(expectedElement);
+        expect(rootCategories).toEqual(expected);
     });
 
     test('it returns subcategories for main categories', async () => {
@@ -52,7 +51,9 @@ describe('fetchChildCategories testing', () => {
             const subcategories = await CategoryServices.fetchChildCategories(
                 category.id
             );
-            expect(subcategories).not.toHaveLength(0);
+            const expectedElement = [expect.any(Object)];
+            const expected = expect.arrayContaining(expectedElement);
+            expect(subcategories).toEqual(expected);
         }
     });
 

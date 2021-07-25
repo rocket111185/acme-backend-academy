@@ -39,7 +39,6 @@ function checkProperties(propertyList) {
     }
 }
 
-
 module.exports = {
     wrappedAxios,
     checkProperties,

@@ -21,6 +21,8 @@ Sentry.init({
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
+// START OF NON-SENTRY MIDDLEWARES
+
 app.use(express.static('public'));
 
 const hbs = handlebars.create({
@@ -32,6 +34,8 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 require('./routes')(app);
+
+// END OF NON-SENTRY MIDDLEWARES
 
 app.use(Sentry.Handlers.errorHandler());
 

@@ -32,5 +32,5 @@ async function fetchChildCategories(parentId = ROOT_CATEGORY) {
 
 module.exports = {
     fetchCategory,
-    fetchChildCategories
+    fetchChildCategories,
 };

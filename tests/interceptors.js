@@ -12,10 +12,12 @@ const createMock = (mockedProperties) => () => {
     return result;
 };
 
+const mockApp = createMock(['use']);
 const mockRequest = createMock(['body', 'params', 'query']);
 const mockResponse = createMock(['render', 'redirect', 'status', 'json']);
 
 module.exports = {
+    mockApp,
     mockRequest,
     mockResponse,
 };

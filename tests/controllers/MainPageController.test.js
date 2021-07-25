@@ -1,7 +1,7 @@
 'use strict';
 
 const MainPageController = require('../../controllers/MainPageController.js');
-const { mockRequest, mockResponse } = require('./interceptors.js');
+const { mockRequest, mockResponse } = require('../interceptors.js');
 
 describe('MainPage testing', () => {
     test('it calls render and passes object containing header', async () => {

@@ -39,9 +39,11 @@ describe('fetchItemList testing', () => {
 
         // arrayContaining accepts subarray of elements
         // which should be in array
-        const expectedElement = [expect.objectContaining({
-            id: expect.any(String),
-        })];
+        const expectedElement = [
+            expect.objectContaining({
+                id: expect.any(String),
+            }),
+        ];
         const expected = expect.arrayContaining(expectedElement);
         expect(productList).toEqual(expected);
     });
@@ -63,9 +65,7 @@ describe('fetchItem and fetchItemList testing', () => {
         const productList = await ItemServices.fetchItemList(category);
 
         for (const product of productList) {
-            const fetchedItem = await ItemServices.fetchItem(
-                product.id
-            );
+            const fetchedItem = await ItemServices.fetchItem(product.id);
             expect(fetchedItem).toEqual(product);
         }
     });

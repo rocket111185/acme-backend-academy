@@ -1,7 +1,7 @@
 'use strict';
 
 const ItemController = require('../../controllers/ItemController.js');
-const { mockRequest, mockResponse } = require('./interceptors.js');
+const { mockRequest, mockResponse } = require('../interceptors.js');
 const {
     EXISTING_CATEGORY,
     UNEXISTING_CATEGORY,
