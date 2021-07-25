@@ -1,7 +1,7 @@
 'use strict';
 
 const CategoryServices = require('../../services/CategoryServices.js');
-const { UNEXISTING_CATEGORY } = require('../config.js');
+const { UNEXISTING_CATEGORY } = require('../testconfig.js');
 
 describe('fetchCategory testing', () => {
     test('it returns all the categories for "all"', async () => {

@@ -16,15 +16,18 @@
                 <h5 class="mt-2">{{page_title}}</h5>
                 <p>{{{long_description}}}</p>
                 <div class="row justify-content-between">
-                    <div class="col-6">
-                        <a href="#" class="btn btn-primary
-                        {{#unless orderable}} disabled" aria-disabled="true"{{else}}"{{/unless}}
-                        {{!-- There's workaround below for incorrect syntax highlighting--}} 
-                        {{#if false}}"{{/if}}>
-                            Buy Now
-                        </a>
+                    <div class="col-4">
+                        {{#if orderable}}
+                            <a href="#" class="btn btn-primary">
+                                Buy Now
+                            </a>
+                        {{else}}
+                            <a href="#" class="btn btn-primary disabled" aria-disabled="true">
+                                Unable to buy
+                            </a>
+                        {{/if}}
                     </div>
-                    <div class="col-6">
+                    <div class="col-8">
                         Price: {{price}}
                         <div class="btn-group">
                             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">

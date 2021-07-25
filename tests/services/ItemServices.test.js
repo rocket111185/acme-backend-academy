@@ -6,7 +6,7 @@ const {
     UNEXISTING_CATEGORY,
     EXISTING_ITEM_ID,
     UNEXISTING_ITEM_ID,
-} = require('../config.js');
+} = require('../testconfig.js');
 
 describe('fetchItem testing', () => {
     test('it returns object if item id exists', async () => {

@@ -6,7 +6,7 @@ const {
     EXISTING_PARENT_CATEGORY,
     EXISTING_CATEGORY,
     UNEXISTING_CATEGORY,
-} = require('../config.js');
+} = require('../testconfig.js');
 
 describe('CategoryPage testing', () => {
     test('it renders using object without error for existing category', async () => {

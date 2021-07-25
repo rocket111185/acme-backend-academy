@@ -7,7 +7,7 @@ const {
     UNEXISTING_CATEGORY,
     EXISTING_ITEM_ID,
     UNEXISTING_ITEM_ID,
-} = require('../config.js');
+} = require('../testconfig.js');
 
 describe('ItemListPage testing', () => {
     test(

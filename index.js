@@ -40,8 +40,8 @@ require('./routes')(app);
 app.use(Sentry.Handlers.errorHandler());
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const listener = app.listen(PORT, () => {
     console.log(`Our app is running on port ${PORT}`);
 });
 
-module.exports = app;
+module.exports = listener;
