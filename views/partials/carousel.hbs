@@ -1,37 +1,33 @@
 <div id="itemPicturesCarousel" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    {{#with (findAllPictures image_groups "large")}}
-      {{#each this}}
-        <li data-target="#itemPicturesCarousel" data-slide-to="{{@index}}"
-        {{#unless @index}}
-          class="active"
-        {{/unless}}
-        ></li>
-      {{/each}}
-    {{/with}}
-  </ol>
-  <div class="carousel-inner">
-    {{#with (findAllPictures image_groups "large")}}
-      {{#each this}}
-        <div class="carousel-item
-        {{#unless @index}}
-          active"
-        {{else}}
-          "
-        {{/unless}}
-        {{!-- Just a workaround --}}
-        {{#if false}}"{{/if}}>
-          <img src="/images/{{this.link}}" class="d-block w-100" alt="{{this.alt}}">
-        </div>
-      {{/each}}
-    {{/with}}
-    <a class="carousel-control-prev" href="#itemPicturesCarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#itemPicturesCarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
+    <ol class="carousel-indicators">
+        {{#each (findAllPictures image_groups "large")}}
+            <li data-target="#itemPicturesCarousel" data-slide-to="{{@index}}"
+            {{#unless @index}}
+                class="active"
+            {{/unless}}
+            ></li>
+        {{/each}}
+    </ol>
+    <div class="carousel-inner">
+        {{#each (findAllPictures image_groups "large")}} 
+            <div class="carousel-item
+            {{#unless @index}}
+                active"
+            {{else}}
+                "
+            {{/unless}}
+            {{!-- Just a workaround --}}
+            {{#if false}}"{{/if}}>
+                <img src="/images/{{this.link}}" class="d-block w-100" alt="{{this.alt}}">
+            </div>
+        {{/each}}
+        <a class="carousel-control-prev" href="#itemPicturesCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#itemPicturesCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div>

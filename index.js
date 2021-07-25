@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
-const helpers = require('./services/RenderServices.js');
+const helpers = require('./helpers');
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 
@@ -21,6 +21,8 @@ Sentry.init({
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
+// START OF NON-SENTRY MIDDLEWARES
+
 app.use(express.static('public'));
 
 const hbs = handlebars.create({
@@ -33,11 +35,13 @@ app.set('view engine', 'hbs');
 
 require('./routes')(app);
 
+// END OF NON-SENTRY MIDDLEWARES
+
 app.use(Sentry.Handlers.errorHandler());
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const listener = app.listen(PORT, () => {
     console.log(`Our app is running on port ${PORT}`);
 });
 
-module.exports = app;
+module.exports = listener;

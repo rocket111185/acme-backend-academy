@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{this.page_title}}</h5>
                     <p class="card-text">{{{this.short_description}}}</p>
-                    <p class="card-text">Price: {{getCurrencySymbol this.currency}}{{this.price}}</p>
+                    <p class="card-text">Price: {{getSymbolFromCurrency this.currency}}{{this.price}}</p>
                     <a href="/item/{{this.id}}" class="btn btn-primary
                     {{#unless this.orderable}} disabled" aria-disabled="true"
                     {{#if false}}"{{/if}}

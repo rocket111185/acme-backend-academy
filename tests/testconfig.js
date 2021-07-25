@@ -1,0 +1,15 @@
+const JEST_EXTENDED_TIMEOUT = 30_000;
+const EXISTING_CATEGORY = 'mens-clothing-jackets';
+const EXISTING_PARENT_CATEGORY = 'mens';
+const UNEXISTING_CATEGORY = 'i-do-not-exist';
+const EXISTING_ITEM_ID = '25565189';
+const UNEXISTING_ITEM_ID = 'this-id-does-not-exist';
+
+module.exports = {
+    JEST_EXTENDED_TIMEOUT,
+    EXISTING_CATEGORY,
+    EXISTING_PARENT_CATEGORY,
+    UNEXISTING_CATEGORY,
+    EXISTING_ITEM_ID,
+    UNEXISTING_ITEM_ID,
+};
