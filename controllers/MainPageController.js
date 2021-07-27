@@ -17,7 +17,7 @@ async function MainPage(req, res) {
             header,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 

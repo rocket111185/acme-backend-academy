@@ -10,7 +10,7 @@ const axios = require('axios').create({
 async function wrappedAxios(parameters) {
     try {
         const isGetMethod = parameters.method.toLowerCase() === 'get';
-        const argPlacement = (isGetMethod) ? 'params' : 'data';
+        const argPlacement = isGetMethod ? 'params' : 'data';
 
         if (!parameters[argPlacement]) {
             parameters[argPlacement] = {};

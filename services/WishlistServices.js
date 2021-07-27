@@ -29,13 +29,18 @@ async function addItemToWishlist(token, productId, variantId, quantity = '1') {
             productId,
             variantId,
             quantity,
-        }
+        },
     });
 
     return response;
 }
 
-async function changeWishlistItemQuantity(token, productId, variantId, quantity) {
+async function changeWishlistItemQuantity(
+    token,
+    productId,
+    variantId,
+    quantity
+) {
     checkProperties({ token, productId, variantId, quantity });
 
     const response = await wrappedAxios({
@@ -48,7 +53,7 @@ async function changeWishlistItemQuantity(token, productId, variantId, quantity)
             productId,
             variantId,
             quantity,
-        }
+        },
     });
 
     return response;
@@ -66,7 +71,7 @@ async function removeItemFromWishlist(token, productId, variantId) {
         data: {
             productId,
             variantId,
-        }
+        },
     });
 
     return response;
@@ -76,5 +81,5 @@ module.exports = {
     fetchWishlist,
     addItemToWishlist,
     changeWishlistItemQuantity,
-    removeItemFromWishlist
+    removeItemFromWishlist,
 };

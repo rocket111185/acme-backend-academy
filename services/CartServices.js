@@ -29,7 +29,7 @@ async function addItemToCart(token, productId, variantId, quantity = '1') {
             productId,
             variantId,
             quantity,
-        }
+        },
     });
 
     return response;
@@ -48,7 +48,7 @@ async function changeCartItemQuantity(token, productId, variantId, quantity) {
             productId,
             variantId,
             quantity,
-        }
+        },
     });
 
     return response;
@@ -66,7 +66,7 @@ async function removeItemFromCart(token, productId, variantId) {
         data: {
             productId,
             variantId,
-        }
+        },
     });
 
     return response;

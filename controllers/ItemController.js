@@ -36,7 +36,7 @@ async function ItemListPage(req, res) {
             itemlist,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -68,7 +68,7 @@ async function ItemPage(req, res) {
             item,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 

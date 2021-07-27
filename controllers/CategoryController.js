@@ -37,7 +37,7 @@ async function CategoryPage(req, res) {
             childCategories,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
