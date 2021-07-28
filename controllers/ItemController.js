@@ -30,10 +30,15 @@ async function ItemListPage(req, res) {
             categoryName
         );
 
+        const { token } = req.cookies;
+        const redirect = req.originalUrl;
+
         res.render('itemlist', {
             header,
             currentCategory,
             itemlist,
+            token,
+            redirect,
         });
     } catch (error) {
         console.error(error);
@@ -62,10 +67,15 @@ async function ItemPage(req, res) {
         );
         const header = await CategoryServices.fetchChildCategories();
 
+        const { token } = req.cookies;
+        const redirect = req.originalUrl;
+
         res.render('item', {
             header,
             category,
             item,
+            token,
+            redirect,
         });
     } catch (error) {
         console.error(error);

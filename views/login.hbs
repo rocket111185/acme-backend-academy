@@ -1,45 +1,66 @@
-<ul class="nav nav-pills justify-content-center mb-4" id="pills-tab" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="pills-signup-tab" data-toggle="pill" href="#pills-signup" role="tab" aria-controls="pills-signup" aria-selected="true">Sign Up</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="pills-signin-tab" data-toggle="pill" href="#pills-signin" role="tab" aria-controls="pills-signin" aria-selected="false">Sign In</a>
-</ul>
+<div class="container">
+    {{#if error}}
+        <div class="row">
+            <div class="col-lg-6 mx-auto alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                <strong>{{error}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    {{/if}}
 
-<div class="container tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
-        <h5 class="mb-4">Create a new account</h5>
-        <form action="/login/signup" method="POST">
-            <div class="form-group">
-                <label for="nameFieldSignUp">Your name</label>
-                <input type="text" class="form-control" id="nameFieldSignUp" name="name" aria-describedby="nameHelpSignUp" required>
-                <small id="nameHelpSignUp" class="form-text text-muted">Your name can be whatever you want.</small>
+    <ul class="nav nav-pills justify-content-center my-4" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link {{#unless (eq page 'signin')}}active{{/unless}}" id="pills-signup-tab" data-toggle="pill" href="#pills-signup" role="tab" aria-controls="pills-signup" aria-selected="{{#unless (eq page 'signin')}}true{{else}}false{{/unless}}">Sign Up</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{#if (eq page 'signin')}}active{{/if}}" id="pills-signin-tab" data-toggle="pill" href="#pills-signin" role="tab" aria-controls="pills-signin" aria-selected="{{#if (eq page 'signin')}}true{{else}}false{{/if}}">Sign In</a>
+    </ul>
+
+    <div class="row">
+        <div class="tab-content col-lg-6 mx-auto" id="pills-tabContent">
+            <div class="tab-pane fade {{#unless (eq page 'signin')}}show active{{/unless}}" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
+                <h5 class="mb-4">Create a new account</h5>
+                <form action="/login/signup" method="POST">
+                    <div class="form-group">
+                        <label for="nameFieldSignUp">Your name</label>
+                        <input type="text" class="form-control" id="nameFieldSignUp" name="name" aria-describedby="nameHelpSignUp" required>
+                        <small id="nameHelpSignUp" class="form-text text-muted">Your name can be whatever you want.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailFieldSignUp">Email address</label>
+                        <input type="email" class="form-control" id="emailFieldSignUp" name="email" aria-describedby="emailHelpSignUp" required>
+                        <small id="emailHelpSignUp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordSignUp">Password</label>
+                        <input type="password" class="form-control" id="passwordSignUp" name="password" required>
+                    </div>
+                    {{#if redirect}}
+                        <input type="hidden" name="redirect" value="{{redirect}}">
+                    {{/if}}
+                    <button type="submit" class="btn btn-primary" id="submit-signup">Submit</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="emailFieldSignUp">Email address</label>
-                <input type="email" class="form-control" id="emailFieldSignUp" name="email" aria-describedby="emailHelpSignUp" required>
-                <small id="emailHelpSignUp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <div class="tab-pane fade {{#if (eq page 'signin')}}show active{{/if}}" id="pills-signin" role="tabpanel" aria-labelledby="pills-signin-tab">
+                <h5 class="mb-4">Sign in your existing account</h5>
+                <form action="/login/signin" method="POST">
+                    <div class="form-group">
+                        <label for="emailFieldSignIn">Email address</label>
+                        <input type="email" class="form-control" id="emailFieldSignIn" name="email" aria-describedby="emailHelpSignIn" required>
+                        <small id="emailHelpSignIn" class="form-text text-muted">Input your email, which is connected to your account.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordSignIn">Password</label>
+                        <input type="password" class="form-control" id="passwordSignIn" name="password" required>
+                    </div>
+                    {{#if redirect}}
+                        <input type="hidden" name="redirect" value="{{redirect}}">
+                    {{/if}}
+                    <button type="submit" class="btn btn-primary" id="submit-signin">Submit</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="passwordSignUp">Password</label>
-                <input type="password" class="form-control" id="passwordSignUp" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary" id="submit-signup">Submit</button>
-        </form>
-    </div>
-    <div class="tab-pane fade" id="pills-signin" role="tabpanel" aria-labelledby="pills-signin-tab">
-        <h5 class="mb-4">Sign in your existing account</h5>
-        <form action="/login/signin" method="POST">
-            <div class="form-group">
-                <label for="emailFieldSignIn">Email address</label>
-                <input type="email" class="form-control" id="emailFieldSignIn" name="email" aria-describedby="emailHelpSignIn" required>
-                <small id="emailHelpSignIn" class="form-text text-muted">Input your email, which is connected to your account.</small>
-            </div>
-            <div class="form-group">
-                <label for="passwordSignIn">Password</label>
-                <input type="password" class="form-control" id="passwordSignIn" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary" id="submit-signin">Submit</button>
-        </form>
+        </div>
     </div>
 </div>

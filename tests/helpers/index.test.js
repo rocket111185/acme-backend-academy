@@ -95,3 +95,12 @@ describe('findAllPictures testing', () => {
         expect(picObject).toEqual([]);
     });
 });
+
+describe('eq testing', () => {
+    test('it bevahes like JavaScript operator of strict equality', () => {
+        expect(helpers.eq('foo', 'foo')).toBe(true);
+        expect(helpers.eq('foo', 'bar')).toBe(false);
+        expect(helpers.eq('69', 69)).toBe(false);
+        expect(helpers.eq(0, false)).toBe(false);
+    });
+});

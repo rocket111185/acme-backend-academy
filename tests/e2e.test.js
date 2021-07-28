@@ -74,7 +74,7 @@ describe('Item list page tests', () => {
         async () => {
             const { data } = await axios({
                 method: 'get',
-                url: `/category/itemlist/${EXISTING_CATEGORY}`,
+                url: `/itemlist/${EXISTING_CATEGORY}`,
             });
 
             expect(data).not.toContain('Oops');
@@ -87,7 +87,7 @@ describe('Item list page tests', () => {
         async () => {
             const { data } = await axios({
                 method: 'get',
-                url: `/category/itemlist/${UNEXISTING_CATEGORY}`,
+                url: `/itemlist/${UNEXISTING_CATEGORY}`,
             });
 
             expect(data).toContain('Oops');

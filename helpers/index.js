@@ -1,5 +1,6 @@
 'use strict';
 
+const querystring = require('querystring');
 const getSymbolFromCurrency = require('currency-symbol-map');
 
 const findPicture = (imageGroup, size) => {
@@ -20,8 +21,16 @@ const findAllPictures = (imageGroup, size) => {
     return preparedImageCollection;
 };
 
+const eq = (first, second) => first === second;
+
+const urlencode = (key, value) => (value) ?
+    '?' + querystring.stringify({ [key]: value }) :
+    '';
+
 module.exports = {
     getSymbolFromCurrency,
     findPicture,
     findAllPictures,
+    eq,
+    urlencode,
 };

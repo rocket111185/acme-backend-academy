@@ -2,7 +2,7 @@
 
 const { wrappedAxios, checkProperties } = require('./utils.js');
 
-async function signUp(name, email, password) {
+async function signUp({ name, email, password }) {
     checkProperties({ name, email, password });
 
     const response = await wrappedAxios({
@@ -18,7 +18,7 @@ async function signUp(name, email, password) {
     return response;
 }
 
-async function signIn(email, password) {
+async function signIn({ email, password }) {
     checkProperties({ email, password });
 
     const response = await wrappedAxios({

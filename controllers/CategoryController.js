@@ -26,15 +26,20 @@ async function CategoryPage(req, res) {
         );
 
         if (!childCategories.length) {
-            return res.redirect(`itemlist/${categoryName}`);
+            return res.redirect(`../itemlist/${categoryName}`);
         }
 
         const header = await CategoryServices.fetchChildCategories();
+
+        const { token } = req.cookies;
+        const redirect = req.originalUrl;
 
         res.render('category', {
             header,
             currentCategory,
             childCategories,
+            token,
+            redirect,
         });
     } catch (error) {
         console.error(error);

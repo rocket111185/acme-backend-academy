@@ -13,8 +13,12 @@ async function MainPage(req, res) {
             });
         }
 
+        const { name, token } = req.cookies;
+
         res.render('home', {
             header,
+            name,
+            token,
         });
     } catch (error) {
         console.error(error);
