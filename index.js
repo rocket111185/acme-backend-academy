@@ -38,7 +38,6 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
 require('./routes')(app);
 
 // END OF NON-SENTRY MIDDLEWARES

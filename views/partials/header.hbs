@@ -14,8 +14,14 @@
                 {{/each}}
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    {{#if token}}
+                {{#if token}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/wishlist">Wishlist</a>
+                    </li>
+                    <li class="nav-item">
                         {{#if redirect}}
                             {{#with (urlencode 'redirect' redirect)}}
                                 <a class="nav-link" href="/logout{{this}}">Logout</a>
@@ -23,7 +29,9 @@
                         {{else}}
                             <a class="nav-link" href="/logout">Logout</a>
                         {{/if}}
-                    {{else}}
+                    </li>
+                {{else}}
+                    <li class="nav-item">
                         {{#if redirect}}
                             {{#with (urlencode 'redirect' redirect)}}
                                 <a class="nav-link" href="/login{{this}}">Login</a>
@@ -31,8 +39,8 @@
                         {{else}}
                             <a class="nav-link" href="/login">Login</a>
                         {{/if}}
-                    {{/if}}
-                </li>
+                    </li>
+                {{/if}}
             </ul>
         </div>
     {{/if}}

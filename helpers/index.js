@@ -23,9 +23,8 @@ const findAllPictures = (imageGroup, size) => {
 
 const eq = (first, second) => first === second;
 
-const urlencode = (key, value) => (value) ?
-    '?' + querystring.stringify({ [key]: value }) :
-    '';
+const urlencode = (key, value) =>
+    (value ? '?' + querystring.stringify({ [key]: value }) : '');
 
 module.exports = {
     getSymbolFromCurrency,

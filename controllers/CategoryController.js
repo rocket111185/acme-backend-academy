@@ -32,7 +32,7 @@ async function CategoryPage(req, res) {
         const header = await CategoryServices.fetchChildCategories();
 
         const { token } = req.cookies;
-        const redirect = req.originalUrl;
+        const redirect = req.originalUrl.split('?').shift();
 
         res.render('category', {
             header,

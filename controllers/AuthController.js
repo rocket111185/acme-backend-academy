@@ -15,7 +15,7 @@ async function LoginPage(req, res) {
         }
 
         res.render('login', req.query);
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -37,7 +37,7 @@ async function SignUp(req, res) {
         res.cookie('name', credentials.user.name, cookieSettings);
         res.cookie('token', credentials.token, cookieSettings);
         res.redirect(redirect || '..');
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -46,7 +46,7 @@ async function SignIn(req, res) {
     try {
         const credentials = await AuthServices.signIn(req.body);
         const { redirect } = req.body;
-        
+
         if (credentials.error) {
             credentials.page = 'signin';
             if (redirect) {
@@ -59,7 +59,7 @@ async function SignIn(req, res) {
         res.cookie('name', credentials.user.name, cookieSettings);
         res.cookie('token', credentials.token, cookieSettings);
         res.redirect(redirect || '..');
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -72,7 +72,7 @@ async function Logout(req, res) {
         res.clearCookie('token', cookieSettings);
 
         res.redirect(redirect || '..');
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }

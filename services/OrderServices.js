@@ -32,7 +32,7 @@ async function createOrder(token, address, paymentId, items) {
             address,
             paymentId,
             items,
-        }
+        },
     });
 
     return response;

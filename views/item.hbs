@@ -2,44 +2,102 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item"><a href="/category/{{category.id}}">{{category.name}}</a></li>
-        <li class="breadcrumb-item"><a href="/item/{{id}}">{{item.name}}</a></li>
+        <li class="breadcrumb-item"><a href="/item/{{item.id}}">{{item.name}}</a></li>
     </ol>
 </nav>
 
 {{#with item}}
     <div class="container">
+        {{#if ../error}}
+            <div class="row">
+                <div class="col-lg-6 mx-auto alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{../error}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+
+        {{#if ../success}}
+            <div class="row">
+                <div class="col-lg-6 mx-auto alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{../success}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        {{/if}}        
+
         <div class="row">
             <div class="col-md-6">
                 {{> carousel}}
             </div>
-            <div class="col-md-6">
+            <form class="col-md-6" method="POST">
                 <h5 class="mt-2">{{page_title}}</h5>
                 <p>{{{long_description}}}</p>
-                <div class="row justify-content-between">
-                    <div class="col-4">
+
+                {{#each variation_attributes}}
+                    <h5 class="my-2">{{this.name}}</h5>
+                    {{#each this.values}}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="{{../id}}" id="{{this.value}}" value="{{this.value}}" {{#unless this.orderable}}disabled{{/unless}} {{#unless @index}}required{{/unless}}>
+                            <label class="form-check-label" for="{{this.value}}">
+                                {{this.name}}
+                            </label>
+                        </div>
+                    {{/each}}
+                {{/each}}
+
+                <h5 class="my-2">Amount</h5>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" max="10">
+
+                <input type="hidden" name="productId" value="{{id}}">
+                <input type="hidden" name="redirect" value="{{../redirect}}">
+
+
+                <div class="row justify-content-between mt-4">
+                    <div class="col-md">
                         {{#if orderable}}
-                            <a href="#" class="btn btn-primary">
+                            <button type="submit" formaction="/cart/add" class="btn btn-block btn-primary" id="add-to-cart">
                                 Buy Now
-                            </a>
+                            </button>
                         {{else}}
-                            <a href="#" class="btn btn-primary disabled" aria-disabled="true">
+                            <a href="#" class="btn btn-block btn-primary disabled" aria-disabled="true">
                                 Unable to buy
                             </a>
                         {{/if}}
                     </div>
-                    <div class="col-8">
-                        Price: {{price}}
-                        <div class="btn-group">
-                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-                                {{currency}} <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-item">{{currency}}</li>
-                            </ul>
+                    <div class="col-md-8">
+                        <div class="row justify-content-end">
+                            <div class="col-auto btn btn-light">
+                                Price: {{price}}
+                            </div>
+                            <div class="col-auto btn-group">
+                                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                    {{currency}} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item">{{currency}}</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 {{/with}}
+
+{{!--
+const elements = document.querySelectorAll('input');
+
+const props = {}
+
+for (const el of elements) {
+    if (el.checked) {
+        props[el.name] = el.value;
+  }
+}
+--}}

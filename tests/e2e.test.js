@@ -42,82 +42,64 @@ describe('Category page tests', () => {
         expect(data).toContain('jumbotron');
     });
 
-    test(
-        'HTML page does not contain jumbotron for child category',
-        async () => {
-            const { data } = await axios({
-                method: 'get',
-                url: `/category/${EXISTING_CATEGORY}`,
-            });
+    test('HTML page does not contain jumbotron for child category', async () => {
+        const { data } = await axios({
+            method: 'get',
+            url: `/category/${EXISTING_CATEGORY}`,
+        });
 
-            expect(data).not.toContain('Oops');
-            expect(data).not.toContain('jumbotron');
-        }
-    );
+        expect(data).not.toContain('Oops');
+        expect(data).not.toContain('jumbotron');
+    });
 
-    test(
-        'HTML page contains error for unexisting category',
-        async () => {
-            const { data } = await axios({
-                method: 'get',
-                url: `/category/${UNEXISTING_CATEGORY}`,
-            });
+    test('HTML page contains error for unexisting category', async () => {
+        const { data } = await axios({
+            method: 'get',
+            url: `/category/${UNEXISTING_CATEGORY}`,
+        });
 
-            expect(data).toContain('Oops');
-        }
-    );
+        expect(data).toContain('Oops');
+    });
 });
 
 describe('Item list page tests', () => {
-    test(
-        'HTML page contains cards for valid category',
-        async () => {
-            const { data } = await axios({
-                method: 'get',
-                url: `/itemlist/${EXISTING_CATEGORY}`,
-            });
+    test('HTML page contains cards for valid category', async () => {
+        const { data } = await axios({
+            method: 'get',
+            url: `/itemlist/${EXISTING_CATEGORY}`,
+        });
 
-            expect(data).not.toContain('Oops');
-            expect(data).toContain('card');
-        }
-    );
+        expect(data).not.toContain('Oops');
+        expect(data).toContain('card');
+    });
 
-    test(
-        'HTML page contains error for unexisting category',
-        async () => {
-            const { data } = await axios({
-                method: 'get',
-                url: `/itemlist/${UNEXISTING_CATEGORY}`,
-            });
+    test('HTML page contains error for unexisting category', async () => {
+        const { data } = await axios({
+            method: 'get',
+            url: `/itemlist/${UNEXISTING_CATEGORY}`,
+        });
 
-            expect(data).toContain('Oops');
-        }
-    );
+        expect(data).toContain('Oops');
+    });
 });
 
 describe('Item page tests', () => {
-    test(
-        'HTML page contains "Buy Now" for valid item',
-        async () => {
-            const { data } = await axios({
-                method: 'get',
-                url: `/item/${EXISTING_ITEM_ID}`,
-            });
+    test('HTML page contains "Buy Now" for valid item', async () => {
+        const { data } = await axios({
+            method: 'get',
+            url: `/item/${EXISTING_ITEM_ID}`,
+        });
 
-            expect(data).not.toContain('Oops');
-            expect(data).toContain('Buy Now');
-        }
-    );
+        expect(data).not.toContain('Oops');
+        expect(data).toContain('Buy Now');
+    });
 
-    test(
-        'HTML page contains error for unexisting item',
-        async () => {
-            const { data } = await axios({
-                method: 'get',
-                url: `/item/${UNEXISTING_ITEM_ID}`,
-            });
+    test('HTML page contains error for unexisting item', async () => {
+        const { data } = await axios({
+            method: 'get',
+            url: `/item/${UNEXISTING_ITEM_ID}`,
+        });
 
-            expect(data).toContain('Oops');
-        }
-    );
+        expect(data).toContain('Oops');
+    });
 });

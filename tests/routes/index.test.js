@@ -9,7 +9,7 @@ describe('routes testing', () => {
         routes(app);
 
         const { use } = app;
-        
+
         expect(use).not.toHaveBeenCalledTimes(0);
         for (let i = 1; i <= use.mock.calls.length; i++) {
             expect(use).nthCalledWith(
