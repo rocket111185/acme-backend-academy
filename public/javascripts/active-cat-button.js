@@ -9,7 +9,8 @@ for (const link of links) {
     const id = link.href.split('/').pop();
     // The URL is broken into separate words
     // either by slash or minus
-    if (URL.split(/[/-]/).includes(id)) {
+    const words = URL.split(/[?]/).shift().split(/[/-]/);
+    if (words.includes(id)) {
         link.style.color = 'red';
     }
 }

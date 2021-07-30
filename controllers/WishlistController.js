@@ -1,46 +1,46 @@
 'use strict';
 
 const querystring = require('querystring');
-const CartServices = require('../services/CartServices');
+const WishlistServices = require('../services/WishlistServices');
 const ItemServices = require('../services/ItemServices');
 const CategoryServices = require('../services/CategoryServices');
-const WishlistServices = require('../services/WishlistServices');
+const CartServices = require('../services/CartServices');
 
-async function ViewCart(req, res) {
+async function ViewWishlist(req, res) {
     try {
         const { token } = req.cookies;
 
         if (!token) {
-            const params = querystring.stringify({ redirect: '/cart' });
+            const params = querystring.stringify({ redirect: '/wishlist' });
             return res.redirect(`/login?${params}`);
         }
 
         const header = await CategoryServices.fetchChildCategories();
-        const cart = await CartServices.fetchCart(token);
+        const wishlist = await WishlistServices.fetchWishlist(token);
 
-        const cartError = cart.error;
-        if (cartError) {
-            return res.render('cart', {
-                cartError,
+        const wishlistError = wishlist.error;
+        if (wishlistError) {
+            return res.render('wishlist', {
+                wishlistError,
                 header,
                 token,
             })
         }
 
-        const cartItems = [];
+        const wishlistItems = [];
 
-        for (const element of cart.items) {
+        for (const element of wishlist.items) {
             const item = await ItemServices.fetchItem(element.productId);
             for (const key in element) {
                 item[key] = element[key];
             }
-            cartItems.push(item);
+            wishlistItems.push(item);
         }
 
         const { error, success } = req.query;
-        res.render('cart', {
+        res.render('wishlist', {
             header,
-            cartItems,
+            wishlistItems,
             token,
             error,
             success,
@@ -50,7 +50,7 @@ async function ViewCart(req, res) {
     }
 }
 
-async function AddItemToCart(req, res) {
+async function AddItemToWishlist(req, res) {
     try {
         const { redirect, productId, quantity } = req.body;
         const { token } = req.cookies;
@@ -87,7 +87,7 @@ async function AddItemToCart(req, res) {
             return res.redirect(`${redirect}?${params}`);
         }
 
-        const { error } = await CartServices.addItemToCart(
+        const { error } = await WishlistServices.addItemToWishlist(
             token,
             productId,
             variantId,
@@ -95,7 +95,7 @@ async function AddItemToCart(req, res) {
         );
 
         const params = querystring.stringify(
-            error ? { error } : { success: 'The item was added to cart' }
+            error ? { error } : { success: 'The item was added to wishlist' }
         );
         res.redirect(`${redirect}?${params}`);
     } catch (error) {
@@ -103,7 +103,7 @@ async function AddItemToCart(req, res) {
     }
 }
 
-async function RemoveItemFromCart(req, res) {
+async function RemoveItemFromWishlist(req, res) {
     try {
         const { token } = req.cookies;
         if (!token) {
@@ -113,16 +113,16 @@ async function RemoveItemFromCart(req, res) {
         }
 
         const { productId, variantId } = req.body;
-        const { error } = await CartServices.removeItemFromCart(
+        const { error } = await WishlistServices.removeItemFromWishlist(
             token,
             productId,
             variantId
         );
 
         const params = querystring.stringify(
-            error ? { error } : { success: 'The item was removed from cart' }
+            error ? { error } : { success: 'The item was removed from wishlist' }
         );
-        res.redirect(`/cart?${params}`);
+        res.redirect(`/wishlist?${params}`);
     } catch(error) {
         console.error(error);
     }
@@ -138,7 +138,7 @@ async function ChangeItemQuantity(req, res) {
         }
 
         const { productId, variantId, quantity } = req.body;
-        const { error } = await CartServices.changeCartItemQuantity(
+        const { error } = await WishlistServices.changeWishlistItemQuantity(
             token,
             productId,
             variantId,
@@ -148,13 +148,13 @@ async function ChangeItemQuantity(req, res) {
         const params = querystring.stringify(
             error ? { error } : { success: 'The item quantity was changed' }
         );
-        res.redirect(`/cart?${params}`);
-    } catch(error) {
+        res.redirect(`/wishlist?${params}`);
+    } catch {
         console.error(error);
     }
 }
 
-async function MoveItemToWishlist(req, res) {
+async function MoveItemToCart(req, res) {
     try {
         const { token } = req.cookies;
         if (!token) {
@@ -165,40 +165,40 @@ async function MoveItemToWishlist(req, res) {
 
         const { productId, variantId, quantity } = req.body;
 
-        const wishlistResponse = await WishlistServices.addItemToWishlist(
+        const cartResponse = await CartServices.addItemToCart(
             token,
             productId,
             variantId,
             quantity
         );
 
-        if (wishlistResponse.error) {
-            const { error } = wishlistResponse;
+        if (cartResponse.error) {
+            const { error } = cartResponse;
             const params = querystring.stringify({ error });
-            return res.redirect(`/cart?${params}`);
+            return res.redirect(`/wishlist?${params}`);
         }
 
-        const cartResponse = await CartServices.removeItemFromCart(
+        const wishlistResponse = await WishlistServices.removeItemFromWishlist(
             token,
             productId,
             variantId
         );
 
-        const { error } = cartResponse;
+        const { error } = wishlistResponse;
 
         const params = querystring.stringify(
-            error ? { error } : { success: 'The item was moved to wishlist' }
+            error ? { error } : { success: 'The item was moved to cart' }
         );
-        res.redirect(`/cart?${params}`);
+        res.redirect(`/wishlist?${params}`);
     } catch(error) {
         console.log(error);
     }
 }
 
 module.exports = {
-    ViewCart,
-    AddItemToCart,
-    RemoveItemFromCart,
+    ViewWishlist,
+    AddItemToWishlist,
+    RemoveItemFromWishlist,
     ChangeItemQuantity,
-    MoveItemToWishlist
+    MoveItemToCart,
 };

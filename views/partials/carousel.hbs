@@ -1,6 +1,6 @@
 <div id="itemPicturesCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-        {{#each (findAllPictures image_groups "large")}}
+        {{#each (findAllPictures image_groups "large" "all")}}
             <li data-target="#itemPicturesCarousel" data-slide-to="{{@index}}"
             {{#unless @index}}
                 class="active"
@@ -9,7 +9,7 @@
         {{/each}}
     </ol>
     <div class="carousel-inner">
-        {{#each (findAllPictures image_groups "large")}} 
+        {{#each (findAllPictures image_groups "large" "all")}} 
             <div class="carousel-item
             {{#unless @index}}
                 active"
