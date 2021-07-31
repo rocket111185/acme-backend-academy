@@ -10,9 +10,17 @@ const {
 
 describe('CategoryPage testing', () => {
     test('it renders using object without error for existing category', async () => {
-        const req = mockRequest();
+        const req = mockRequest({
+            cookies: {
+                token: 'THE-TOKEN',
+                name: 'The Tester',
+            },
+            originalUrl: '/some/route',
+            params: {
+                id: EXISTING_PARENT_CATEGORY,
+            },
+        });
         const res = mockResponse();
-        req.params.id = EXISTING_PARENT_CATEGORY;
 
         await CategoryController.CategoryPage(req, res);
         const { render } = res;
@@ -27,9 +35,17 @@ describe('CategoryPage testing', () => {
     });
 
     test('it redirects for category with no children', async () => {
-        const req = mockRequest();
+        const req = mockRequest({
+            cookies: {
+                token: 'THE-TOKEN',
+                name: 'The Tester',
+            },
+            originalUrl: '/some/route',
+            params: {
+                id: EXISTING_CATEGORY,
+            },
+        });
         const res = mockResponse();
-        req.params.id = EXISTING_CATEGORY;
 
         await CategoryController.CategoryPage(req, res);
         const { render, redirect } = res;
@@ -40,9 +56,17 @@ describe('CategoryPage testing', () => {
     });
 
     test('it renders using object with error for unexisting category', async () => {
-        const req = mockRequest();
+        const req = mockRequest({
+            cookies: {
+                token: 'THE-TOKEN',
+                name: 'The Tester',
+            },
+            originalUrl: '/some/route',
+            params: {
+                id: UNEXISTING_CATEGORY,
+            },
+        });
         const res = mockResponse();
-        req.params.id = UNEXISTING_CATEGORY;
 
         await CategoryController.CategoryPage(req, res);
         const { render } = res;

@@ -5,7 +5,12 @@ const { mockRequest, mockResponse } = require('../interceptors.js');
 
 describe('MainPage testing', () => {
     test('it calls render and passes object containing header', async () => {
-        const req = mockRequest();
+        const req = mockRequest({
+            cookies: {
+                token: 'THE-TOKEN',
+                name: 'The Tester',
+            },
+        });
         const res = mockResponse();
 
         await MainPageController.MainPage(req, res);

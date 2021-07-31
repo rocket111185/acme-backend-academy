@@ -18,7 +18,7 @@ async function fetchOrders(token) {
 
 async function createOrder(token, address, paymentId, items) {
     checkProperties({ token, address, paymentId });
-    if (!items.length) {
+    if (!items?.length) {
         throw new Error('The order cannot be created with no items');
     }
 
