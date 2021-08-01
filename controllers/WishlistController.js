@@ -4,10 +4,7 @@ const querystring = require('querystring');
 const WishlistServices = require('../services/WishlistServices');
 const CategoryServices = require('../services/CategoryServices');
 const CartServices = require('../services/CartServices');
-const {
-    generateCompleteItemList,
-    findVariantId,
-} = require('./utils.js');
+const { generateCompleteItemList, findVariantId } = require('./utils.js');
 
 async function ViewWishlist(req, res) {
     try {
@@ -27,7 +24,7 @@ async function ViewWishlist(req, res) {
                 wishlistError,
                 header,
                 token,
-            })
+            });
         }
 
         const wishlistItems = await generateCompleteItemList(wishlist.items);
@@ -40,7 +37,7 @@ async function ViewWishlist(req, res) {
             error,
             success,
         });
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -97,10 +94,12 @@ async function RemoveItemFromWishlist(req, res) {
         );
 
         const params = querystring.stringify(
-            error ? { error } : { success: 'The item was removed from wishlist' }
+            error ?
+                { error } :
+                { success: 'The item was removed from wishlist' }
         );
         res.redirect(`/wishlist?${params}`);
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -140,13 +139,13 @@ async function MoveItemToCart(req, res) {
             });
         }
 
-        const { productId, variantId, quantity } = req.body;
+        const { productId, variantId, initialQuantity } = req.body;
 
         const cartResponse = await CartServices.addItemToCart(
             token,
             productId,
             variantId,
-            quantity
+            initialQuantity
         );
 
         if (cartResponse.error) {
@@ -167,7 +166,7 @@ async function MoveItemToCart(req, res) {
             error ? { error } : { success: 'The item was moved to cart' }
         );
         res.redirect(`/wishlist?${params}`);
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }
 }

@@ -5,10 +5,7 @@ const CartServices = require('../services/CartServices');
 const ItemServices = require('../services/ItemServices');
 const CategoryServices = require('../services/CategoryServices');
 const WishlistServices = require('../services/WishlistServices');
-const {
-    generateCompleteItemList,
-    findVariantId,
-} = require('./utils.js');
+const { generateCompleteItemList, findVariantId } = require('./utils.js');
 
 async function ViewCart(req, res) {
     try {
@@ -28,7 +25,7 @@ async function ViewCart(req, res) {
                 cartError,
                 header,
                 token,
-            })
+            });
         }
 
         const cartItems = await generateCompleteItemList(cart.items);
@@ -41,7 +38,7 @@ async function ViewCart(req, res) {
             error,
             success,
         });
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -101,7 +98,7 @@ async function RemoveItemFromCart(req, res) {
             error ? { error } : { success: 'The item was removed from cart' }
         );
         res.redirect(`/cart?${params}`);
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -127,7 +124,7 @@ async function ChangeItemQuantity(req, res) {
             error ? { error } : { success: 'The item quantity was changed' }
         );
         res.redirect(`/cart?${params}`);
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -141,13 +138,13 @@ async function MoveItemToWishlist(req, res) {
             });
         }
 
-        const { productId, variantId, quantity } = req.body;
+        const { productId, variantId, initialQuantity } = req.body;
 
         const wishlistResponse = await WishlistServices.addItemToWishlist(
             token,
             productId,
             variantId,
-            quantity
+            initialQuantity
         );
 
         if (wishlistResponse.error) {
@@ -168,7 +165,7 @@ async function MoveItemToWishlist(req, res) {
             error ? { error } : { success: 'The item was moved to wishlist' }
         );
         res.redirect(`/cart?${params}`);
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }
 }
@@ -178,5 +175,5 @@ module.exports = {
     AddItemToCart,
     RemoveItemFromCart,
     ChangeItemQuantity,
-    MoveItemToWishlist
+    MoveItemToWishlist,
 };

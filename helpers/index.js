@@ -14,9 +14,8 @@ const findPicture = (imageGroup, size) => {
 
 const findAllPictures = (imageGroup, size, variation = 'all') => {
     const foundImageObjects = imageGroup.filter((el) => {
-        const variantBool = (variation === 'all') ?
-            true :
-            el.variation_value === variation;
+        const variantBool =
+            variation === 'all' ? true : el.variation_value === variation;
         const sizeBool = el.view_type === size;
         return sizeBool && variantBool;
     });

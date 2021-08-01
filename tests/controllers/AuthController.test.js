@@ -16,27 +16,24 @@ const {
 } = require('../testconfig.js');
 
 describe('LoginPage testing', () => {
-    test(
-        'it renders page without error if you have no error or cookies',
-        async () => {
-            const req = mockRequest({
-                cookies: {},
-                query: {},
-            });
-            const res = mockResponse();
+    test('it renders page without error if you have no error or cookies', async () => {
+        const req = mockRequest({
+            cookies: {},
+            query: {},
+        });
+        const res = mockResponse();
 
-            await AuthController.LoginPage(req, res);
-            const { render } = res;
+        await AuthController.LoginPage(req, res);
+        const { render } = res;
 
-            expect(render).toHaveBeenCalledTimes(1);
-            expect(render).toBeCalledWith(
-                expect.any(String),
-                expect.not.objectContaining({
-                    error: expect.any(String),
-                })
-            );
-        }
-    );
+        expect(render).toHaveBeenCalledTimes(1);
+        expect(render).toBeCalledWith(
+            expect.any(String),
+            expect.not.objectContaining({
+                error: expect.any(String),
+            })
+        );
+    });
 
     test('it renders page with error if the token is present', async () => {
         const req = mockRequest({
@@ -96,64 +93,50 @@ describe('SignUp testing', () => {
         const { redirect } = res;
 
         expect(redirect).toHaveBeenCalledTimes(1);
-        expect(redirect).toBeCalledWith(
-            expect.stringContaining('error')
-        );
+        expect(redirect).toBeCalledWith(expect.stringContaining('error'));
     });
 
-    test(
-        'it redirects with redirect querystring if req.body had it',
-        async () => {
-            const req = mockRequest({
-                body: {
-                    name: REGISTERED_NAME,
-                    email: REGISTERED_EMAIL,
-                    password: REGISTERED_PASSWORD,
-                    redirect: '/somewhere/there',
-                },
-            });
-            const res = mockResponse();
+    test('it redirects with redirect querystring if req.body had it', async () => {
+        const req = mockRequest({
+            body: {
+                name: REGISTERED_NAME,
+                email: REGISTERED_EMAIL,
+                password: REGISTERED_PASSWORD,
+                redirect: '/somewhere/there',
+            },
+        });
+        const res = mockResponse();
 
-            await AuthController.SignUp(req, res);
-            const { redirect } = res;
+        await AuthController.SignUp(req, res);
+        const { redirect } = res;
 
-            expect(redirect).toHaveBeenCalledTimes(1);
-            expect(redirect).toBeCalledWith(
-                expect.stringContaining('error')
-            );
-            expect(redirect).toBeCalledWith(
-                expect.stringContaining('redirect')
-            );
-        }
-    );
+        expect(redirect).toHaveBeenCalledTimes(1);
+        expect(redirect).toBeCalledWith(expect.stringContaining('error'));
+        expect(redirect).toBeCalledWith(expect.stringContaining('redirect'));
+    });
 
-    test(
-        'it writes cookies and redirects with no error if the user is new',
-        async () => {
-            const req = mockRequest({
-                body: {
-                    name: randomString(10),
-                    email: randomString(15) + '@gmail.com',
-                    password: randomString(20),
-                },
-            });
-            const res = mockResponse();
+    test('it writes cookies and redirects with no error if the user is new', async () => {
+        const req = mockRequest({
+            body: {
+                name: randomString(10),
+                email: randomString(15) + '@gmail.com',
+                password: randomString(20),
+            },
+        });
+        const res = mockResponse();
 
-            await AuthController.SignUp(req, res);
-            const { redirect, cookie } = res;
+        await AuthController.SignUp(req, res);
+        const { redirect, cookie } = res;
 
-            expect(cookie).not.toHaveBeenCalledTimes(0);
-            expect(cookie).toBeCalledWith(
-                expect.any(String),
-                expect.any(String),
-                expect.any(Object)
-            );
-            expect(redirect).toHaveBeenCalledTimes(1);
-            expect(redirect).toBeCalledWith(
-                expect.not.stringContaining('error')
-            );
-        }
-    );
+        expect(cookie).not.toHaveBeenCalledTimes(0);
+        expect(cookie).toBeCalledWith(
+            expect.any(String),
+            expect.any(String),
+            expect.any(Object)
+        );
+        expect(redirect).toHaveBeenCalledTimes(1);
+        expect(redirect).toBeCalledWith(expect.not.stringContaining('error'));
+    });
 });
 
 describe('SignIn testing', () => {
@@ -170,62 +153,48 @@ describe('SignIn testing', () => {
         const { redirect } = res;
 
         expect(redirect).toHaveBeenCalledTimes(1);
-        expect(redirect).toBeCalledWith(
-            expect.stringContaining('error')
-        );
+        expect(redirect).toBeCalledWith(expect.stringContaining('error'));
     });
 
-    test(
-        'it redirects with redirect querystring if req.body had it',
-        async () => {
-            const req = mockRequest({
-                body: {
-                    email: randomString(15) + '@gmail.com',
-                    password: randomString(20),
-                    redirect: '/somewhere/there',
-                },
-            });
-            const res = mockResponse();
+    test('it redirects with redirect querystring if req.body had it', async () => {
+        const req = mockRequest({
+            body: {
+                email: randomString(15) + '@gmail.com',
+                password: randomString(20),
+                redirect: '/somewhere/there',
+            },
+        });
+        const res = mockResponse();
 
-            await AuthController.SignIn(req, res);
-            const { redirect } = res;
+        await AuthController.SignIn(req, res);
+        const { redirect } = res;
 
-            expect(redirect).toHaveBeenCalledTimes(1);
-            expect(redirect).toBeCalledWith(
-                expect.stringContaining('error')
-            );
-            expect(redirect).toBeCalledWith(
-                expect.stringContaining('redirect')
-            );
-        }
-    );
+        expect(redirect).toHaveBeenCalledTimes(1);
+        expect(redirect).toBeCalledWith(expect.stringContaining('error'));
+        expect(redirect).toBeCalledWith(expect.stringContaining('redirect'));
+    });
 
-    test(
-        'it writes cookies and redirects with no error if the user exists',
-        async () => {
-            const req = mockRequest({
-                body: {
-                    email: REGISTERED_EMAIL,
-                    password: REGISTERED_PASSWORD,
-                },
-            });
-            const res = mockResponse();
+    test('it writes cookies and redirects with no error if the user exists', async () => {
+        const req = mockRequest({
+            body: {
+                email: REGISTERED_EMAIL,
+                password: REGISTERED_PASSWORD,
+            },
+        });
+        const res = mockResponse();
 
-            await AuthController.SignIn(req, res);
-            const { redirect, cookie } = res;
+        await AuthController.SignIn(req, res);
+        const { redirect, cookie } = res;
 
-            expect(cookie).not.toHaveBeenCalledTimes(0);
-            expect(cookie).toBeCalledWith(
-                expect.any(String),
-                expect.any(String),
-                expect.any(Object)
-            );
-            expect(redirect).toHaveBeenCalledTimes(1);
-            expect(redirect).toBeCalledWith(
-                expect.not.stringContaining('error')
-            );
-        }
-    );
+        expect(cookie).not.toHaveBeenCalledTimes(0);
+        expect(cookie).toBeCalledWith(
+            expect.any(String),
+            expect.any(String),
+            expect.any(Object)
+        );
+        expect(redirect).toHaveBeenCalledTimes(1);
+        expect(redirect).toBeCalledWith(expect.not.stringContaining('error'));
+    });
 });
 
 describe('Logout testing', () => {
@@ -242,28 +211,21 @@ describe('Logout testing', () => {
         );
 
         expect(redirect).toHaveBeenCalledTimes(1);
-        expect(redirect).toBeCalledWith(
-            expect.not.stringContaining('error')
-        );
+        expect(redirect).toBeCalledWith(expect.not.stringContaining('error'));
     });
 
-    test(
-        'it redirects with proper URL if req.body had it',
-        async () => {
-            const req = mockRequest({
-                query: {
-                    redirect: '/somewhere/there',
-                },
-            });
-            const res = mockResponse();
+    test('it redirects with proper URL if req.body had it', async () => {
+        const req = mockRequest({
+            query: {
+                redirect: '/somewhere/there',
+            },
+        });
+        const res = mockResponse();
 
-            await AuthController.Logout(req, res);
-            const { redirect } = res;
+        await AuthController.Logout(req, res);
+        const { redirect } = res;
 
-            expect(redirect).toHaveBeenCalledTimes(1);
-            expect(redirect).toBeCalledWith(
-                req.query.redirect
-            );
-        }
-    );
+        expect(redirect).toHaveBeenCalledTimes(1);
+        expect(redirect).toBeCalledWith(req.query.redirect);
+    });
 });
