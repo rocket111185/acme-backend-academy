@@ -1,4 +1,8 @@
 <div class="container">
-    <h1>Welcome!</h1>
+    {{#if name}}
+        <h1>Welcome, {{name}}!</h1>
+    {{else}}
+        <h1>Welcome!</h1>
+    {{/if}}
     <p>Choose one of the categories on the header.</p>
 </div>

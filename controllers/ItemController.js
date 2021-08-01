@@ -30,13 +30,18 @@ async function ItemListPage(req, res) {
             categoryName
         );
 
+        const { token } = req.cookies;
+        const redirect = req.originalUrl.split('?').shift();
+
         res.render('itemlist', {
             header,
             currentCategory,
             itemlist,
+            token,
+            redirect,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -45,9 +50,9 @@ async function ItemPage(req, res) {
         const itemId = req.params.id;
 
         const item = await ItemServices.fetchItem(itemId);
-        const { error } = item;
 
-        if (error) {
+        if (item.error) {
+            const { error } = item;
             return res.render('error', {
                 error,
                 reasons: [
@@ -62,13 +67,21 @@ async function ItemPage(req, res) {
         );
         const header = await CategoryServices.fetchChildCategories();
 
+        const { token } = req.cookies;
+        const redirect = req.originalUrl.split('?').shift();
+        const { error, success } = req.query;
+
         res.render('item', {
             header,
             category,
             item,
+            token,
+            redirect,
+            error,
+            success,
         });
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 

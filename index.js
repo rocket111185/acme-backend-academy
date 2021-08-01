@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
 const helpers = require('./helpers');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const Sentry = require('@sentry/node');
 const Tracing = require('@sentry/tracing');
 
@@ -32,6 +34,9 @@ const hbs = handlebars.create({
 });
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 require('./routes')(app);
 

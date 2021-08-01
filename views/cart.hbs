@@ -1,0 +1,49 @@
+<div class="container">
+
+    {{> popup}}
+
+    <h2 class="my-4">Cart</h2>
+
+    {{#if cartError}}
+        <p>The cart is empty. Add any item to it and you will see your products)</p>
+    {{/if}}
+
+    {{#each cartItems}}
+        <div class="card mb-4">
+            <div class="row">
+                <div class="col-md-5">
+                    {{#with this}}
+                        {{> thumbnail-cart}}
+                    {{/with}}
+                </div>
+                <form class="col-md m-2 d-flex flex-column" method="POST">
+                    <div class="wrapper flex-grow-1">
+                        <h5 class="card-title">{{this.page_title}}</h5>
+                        <p class="card-text">{{{this.short_description}}}</p>
+                        {{#each (generateProperties this.variant.variation_values this.variation_attributes)}}
+                            <p class="card-text">{{this.name}}: {{this.value}}</p>
+                        {{/each}}
+                        <p class="card-text">Price: {{getSymbolFromCurrency this.currency}}{{this.variant.price}}</p>
+                        <p class="card-text">Quantity: {{this.quantity}}</p>
+                        <input type="hidden" name="productId" value="{{this.id}}">
+                        <input type="hidden" name="variantId" value="{{this.variant.product_id}}">
+                    </div>
+                    <div class="row justify-content-around mb-4">
+                        <input class="col-4 btn" type="number" id="quantity" name="quantity" value="1" min="0" max="10">
+                        <button type="submit" formaction="/cart/changeQuantity" class="btn btn-warning col-4 mx-4 my-2" id="remove-from-cart">
+                            Change item quantity
+                        </button>
+                    </div>
+                    <div class="row justify-content-around">
+                        <button type="submit" formaction="/cart/moveToWishlist" class="btn btn-warning col-md-4 mx-4 my-2" id="remove-from-cart">
+                            Move to wishlist
+                        </button>
+                        <button type="submit" formaction="/cart/remove" class="btn btn-danger col-md-4 mx-4 my-2" id="remove-from-cart">
+                            Remove from cart
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {{/each}}
+</div>

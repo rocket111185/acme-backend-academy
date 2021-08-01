@@ -1,10 +1,9 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">OSF Backend</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
     {{#if header}}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 {{#each header}}
@@ -12,6 +11,35 @@
                         <a class="nav-link" href="/category/{{this.id}}">{{this.name}}</a>
                     </li>
                 {{/each}}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {{#if token}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/wishlist">Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                        {{#if redirect}}
+                            {{#with (urlencode 'redirect' redirect)}}
+                                <a class="nav-link" href="/logout{{this}}">Logout</a>
+                            {{/with}}
+                        {{else}}
+                            <a class="nav-link" href="/logout">Logout</a>
+                        {{/if}}
+                    </li>
+                {{else}}
+                    <li class="nav-item">
+                        {{#if redirect}}
+                            {{#with (urlencode 'redirect' redirect)}}
+                                <a class="nav-link" href="/login{{this}}">Login</a>
+                            {{/with}}
+                        {{else}}
+                            <a class="nav-link" href="/login">Login</a>
+                        {{/if}}
+                    </li>
+                {{/if}}
             </ul>
         </div>
     {{/if}}

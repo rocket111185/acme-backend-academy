@@ -9,10 +9,13 @@ const axios = require('axios').create({
 // So that, it doesn't throw errors for unsuccessful queries
 async function wrappedAxios(parameters) {
     try {
-        if (!parameters.params) {
-            parameters.params = {};
+        const isGetMethod = parameters.method.toLowerCase() === 'get';
+        const argPlacement = isGetMethod ? 'params' : 'data';
+
+        if (!parameters[argPlacement]) {
+            parameters[argPlacement] = {};
         }
-        parameters.params.secretKey = SECRET_KEY;
+        parameters[argPlacement].secretKey = SECRET_KEY;
 
         const response = await axios(parameters);
         return response.data;
