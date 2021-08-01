@@ -15,14 +15,11 @@ jobs:
   test:
     docker:
       - image: circleci/node:14.17.2
-    environment:
-      NODE_ENV: development
-      SECRET_KEY: ${SECRET_KEY}
     steps:
       - checkout
       - run: npm ci
-      - run: echo ${SECRET_KEY}
-      - run: NODE_ENV=${NODE_ENV} SECRET_KEY=${SECRET_KEY} npm test
+      - run: echo $SECRET_KEY
+      - run: SECRET_KEY=$SECRET_KEY npm test
     
 
 workflows:
