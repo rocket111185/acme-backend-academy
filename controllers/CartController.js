@@ -5,6 +5,10 @@ const CartServices = require('../services/CartServices');
 const ItemServices = require('../services/ItemServices');
 const CategoryServices = require('../services/CategoryServices');
 const WishlistServices = require('../services/WishlistServices');
+const {
+    generateCompleteItemList,
+    findVariantId,
+} = require('./utils.js');
 
 async function ViewCart(req, res) {
     try {
@@ -27,15 +31,7 @@ async function ViewCart(req, res) {
             })
         }
 
-        const cartItems = [];
-
-        for (const element of cart.items) {
-            const item = await ItemServices.fetchItem(element.productId);
-            for (const key in element) {
-                item[key] = element[key];
-            }
-            cartItems.push(item);
-        }
+        const cartItems = await generateCompleteItemList(cart.items);
 
         const { error, success } = req.query;
         res.render('cart', {
@@ -60,25 +56,7 @@ async function AddItemToCart(req, res) {
             return res.redirect(`/login?${params}`);
         }
 
-        const { variants } = await ItemServices.fetchItem(productId);
-        let variantId;
-
-        // Find id of the item variant
-        // The search is based on multiple input form values
-        for (const variant of variants) {
-            let found = true;
-            const variations = variant.variation_values;
-            for (const property in variations) {
-                if (variations[property] !== req.body[property]) {
-                    found = false;
-                    break;
-                }
-            }
-            if (found) {
-                variantId = variant.product_id;
-                break;
-            }
-        }
+        const variantId = await findVariantId(req.body);
 
         if (!variantId) {
             const params = querystring.stringify({
