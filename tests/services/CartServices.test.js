@@ -191,11 +191,7 @@ describe('removeItemFromCart testing', () => {
         for (const argument of irregularArgumentList) {
             // The async version of "expect.toThrow"
             await expect(
-                CartServices.removeItemFromCart(
-                    argument,
-                    argument,
-                    argument
-                )
+                CartServices.removeItemFromCart(argument, argument, argument)
             ).rejects.toBeDefined();
         }
     });

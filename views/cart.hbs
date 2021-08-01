@@ -27,6 +27,7 @@
                         <p class="card-text">Quantity: {{this.quantity}}</p>
                         <input type="hidden" name="productId" value="{{this.id}}">
                         <input type="hidden" name="variantId" value="{{this.variant.product_id}}">
+                        <input type="hidden" name="initialQuantity" value="{{this.quantity}}">
                     </div>
                     <div class="row justify-content-around mb-4">
                         <input class="col-4 btn" type="number" id="quantity" name="quantity" value="1" min="0" max="10">

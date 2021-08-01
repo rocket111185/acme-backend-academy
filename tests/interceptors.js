@@ -21,9 +21,14 @@ const mockApp = createMock(['use']);
 
 const mockRequest = createMock(['body', 'params', 'query']);
 
-const mockResponse = createMock(
-    ['render', 'redirect', 'status', 'json', 'cookie', 'clearCookie']
-);
+const mockResponse = createMock([
+    'render',
+    'redirect',
+    'status',
+    'json',
+    'cookie',
+    'clearCookie',
+]);
 
 function randomString(length) {
     const HEXATRIDECIMAL_RADIX = 36;

@@ -18,7 +18,7 @@ async function generateCompleteItemList(itemlist) {
 
 async function findVariantId(item) {
     const { productId } = item;
-    const { variants } = await ItemServices.fetchItem(productId)
+    const { variants } = await ItemServices.fetchItem(productId);
 
     for (const variant of variants) {
         let found = true;
