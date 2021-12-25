@@ -2,7 +2,7 @@
 
 const { wrappedAxios, checkProperties } = require('./utils.js');
 
-async function fetchWishlist(token) {
+const fetchWishlist = async (token) => {
   checkProperties({ token });
 
   const response = await wrappedAxios({
@@ -14,9 +14,14 @@ async function fetchWishlist(token) {
   });
 
   return response;
-}
+};
 
-async function addItemToWishlist(token, productId, variantId, quantity = '1') {
+const addItemToWishlist = async (
+  token,
+  productId,
+  variantId,
+  quantity = '1'
+) => {
   checkProperties({ token, productId, variantId, quantity });
 
   const response = await wrappedAxios({
@@ -33,14 +38,14 @@ async function addItemToWishlist(token, productId, variantId, quantity = '1') {
   });
 
   return response;
-}
+};
 
-async function changeWishlistItemQuantity(
+const changeWishlistItemQuantity = async (
   token,
   productId,
   variantId,
   quantity
-) {
+) => {
   checkProperties({ token, productId, variantId, quantity });
 
   const response = await wrappedAxios({
@@ -57,9 +62,9 @@ async function changeWishlistItemQuantity(
   });
 
   return response;
-}
+};
 
-async function removeItemFromWishlist(token, productId, variantId) {
+const removeItemFromWishlist = async (token, productId, variantId) => {
   checkProperties({ token, productId, variantId });
 
   const response = await wrappedAxios({
@@ -75,7 +80,7 @@ async function removeItemFromWishlist(token, productId, variantId) {
   });
 
   return response;
-}
+};
 
 module.exports = {
   fetchWishlist,

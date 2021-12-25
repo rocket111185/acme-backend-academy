@@ -3,7 +3,7 @@
 const CategoryServices = require('../services/CategoryServices');
 const ItemServices = require('../services/ItemServices');
 
-async function ItemListPage(req, res) {
+const itemListPage = async (req, res) => {
   try {
     const categoryName = req.params.id;
     const pageNumber = req.query.page;
@@ -38,9 +38,9 @@ async function ItemListPage(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function ItemPage(req, res) {
+const itemPage = async (req, res) => {
   try {
     const itemId = req.params.id;
 
@@ -78,9 +78,9 @@ async function ItemPage(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 module.exports = {
-  ItemListPage,
-  ItemPage,
+  itemListPage,
+  itemPage,
 };

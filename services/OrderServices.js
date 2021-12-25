@@ -2,7 +2,7 @@
 
 const { wrappedAxios, checkProperties } = require('./utils.js');
 
-async function fetchOrders(token) {
+const fetchOrders = async (token) => {
   checkProperties({ token });
 
   const response = await wrappedAxios({
@@ -14,9 +14,9 @@ async function fetchOrders(token) {
   });
 
   return response;
-}
+};
 
-async function createOrder(token, address, paymentId, items) {
+const createOrder = async (token, address, paymentId, items) => {
   checkProperties({ token, address, paymentId });
   if (!items?.length) {
     throw new Error('The order cannot be created with no items');
@@ -36,7 +36,7 @@ async function createOrder(token, address, paymentId, items) {
   });
 
   return response;
-}
+};
 
 module.exports = {
   fetchOrders,

@@ -2,7 +2,7 @@
 
 const ItemServices = require('../services/ItemServices');
 
-async function generateCompleteItemList(itemlist) {
+const generateCompleteItemList = async (itemlist) => {
   const result = [];
 
   for (const element of itemlist) {
@@ -14,9 +14,9 @@ async function generateCompleteItemList(itemlist) {
   }
 
   return result;
-}
+};
 
-async function findVariantId(item) {
+const findVariantId = async (item) => {
   const { productId } = item;
   const { variants } = await ItemServices.fetchItem(productId);
 
@@ -33,7 +33,7 @@ async function findVariantId(item) {
       return variant.product_id;
     }
   }
-}
+};
 
 module.exports = {
   generateCompleteItemList,

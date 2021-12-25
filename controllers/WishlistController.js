@@ -6,7 +6,7 @@ const CategoryServices = require('../services/CategoryServices');
 const CartServices = require('../services/CartServices');
 const { generateCompleteItemList, findVariantId } = require('./utils.js');
 
-async function ViewWishlist(req, res) {
+const viewWishlist = async (req, res) => {
   try {
     const { token } = req.cookies;
 
@@ -40,9 +40,9 @@ async function ViewWishlist(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function AddItemToWishlist(req, res) {
+const addItemToWishlist = async (req, res) => {
   try {
     const { redirect, productId, quantity } = req.body;
     const { token } = req.cookies;
@@ -75,9 +75,9 @@ async function AddItemToWishlist(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function RemoveItemFromWishlist(req, res) {
+const removeItemFromWishlist = async (req, res) => {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -100,9 +100,9 @@ async function RemoveItemFromWishlist(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function ChangeItemQuantity(req, res) {
+const changeItemQuantity = async (req, res) => {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -123,12 +123,12 @@ async function ChangeItemQuantity(req, res) {
       error ? { error } : { success: 'The item quantity was changed' }
     );
     res.redirect(`/wishlist?${params}`);
-  } catch {
+  } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function MoveItemToCart(req, res) {
+const moveItemToCart = async (req, res) => {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -167,12 +167,12 @@ async function MoveItemToCart(req, res) {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 module.exports = {
-  ViewWishlist,
-  AddItemToWishlist,
-  RemoveItemFromWishlist,
-  ChangeItemQuantity,
-  MoveItemToCart,
+  viewWishlist,
+  addItemToWishlist,
+  removeItemFromWishlist,
+  changeItemQuantity,
+  moveItemToCart,
 };

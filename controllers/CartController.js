@@ -2,12 +2,11 @@
 
 const querystring = require('querystring');
 const CartServices = require('../services/CartServices');
-const ItemServices = require('../services/ItemServices');
 const CategoryServices = require('../services/CategoryServices');
 const WishlistServices = require('../services/WishlistServices');
 const { generateCompleteItemList, findVariantId } = require('./utils.js');
 
-async function ViewCart(req, res) {
+const viewCart = async (req, res) => {
   try {
     const { token } = req.cookies;
 
@@ -41,9 +40,9 @@ async function ViewCart(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function AddItemToCart(req, res) {
+const addItemToCart = async (req, res) => {
   try {
     const { redirect, productId, quantity } = req.body;
     const { token } = req.cookies;
@@ -76,9 +75,9 @@ async function AddItemToCart(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function RemoveItemFromCart(req, res) {
+const removeItemFromCart = async (req, res) => {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -101,9 +100,9 @@ async function RemoveItemFromCart(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function ChangeItemQuantity(req, res) {
+const changeItemQuantity = async (req, res) => {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -127,9 +126,9 @@ async function ChangeItemQuantity(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function MoveItemToWishlist(req, res) {
+const moveItemToWishlist = async (req, res) => {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -168,12 +167,12 @@ async function MoveItemToWishlist(req, res) {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 module.exports = {
-  ViewCart,
-  AddItemToCart,
-  RemoveItemFromCart,
-  ChangeItemQuantity,
-  MoveItemToWishlist,
+  viewCart,
+  addItemToCart,
+  removeItemFromCart,
+  changeItemQuantity,
+  moveItemToWishlist,
 };

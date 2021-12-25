@@ -3,13 +3,13 @@
 const { ROOT_CATEGORY } = require('../config.js');
 const { wrappedAxios, checkProperties } = require('./utils.js');
 
-async function fetchCategory(categoryId) {
+const fetchCategory = async (categoryId) => {
   checkProperties({ categoryId });
 
   const url =
-    categoryId.toLowerCase() === 'all' ?
-      '/categories' :
-      `/categories/${categoryId}`;
+    categoryId.toLowerCase() === 'all'
+      ? '/categories'
+      : `/categories/${categoryId}`;
 
   const response = await wrappedAxios({
     method: 'get',
@@ -17,9 +17,9 @@ async function fetchCategory(categoryId) {
   });
 
   return response;
-}
+};
 
-async function fetchChildCategories(parentId = ROOT_CATEGORY) {
+const fetchChildCategories = async (parentId = ROOT_CATEGORY) => {
   checkProperties({ parentId });
 
   const response = await wrappedAxios({
@@ -28,7 +28,7 @@ async function fetchChildCategories(parentId = ROOT_CATEGORY) {
   });
 
   return response;
-}
+};
 
 module.exports = {
   fetchCategory,

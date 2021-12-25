@@ -7,7 +7,7 @@ const axios = require('axios').create({
 });
 
 // So that, it doesn't throw errors for unsuccessful queries
-async function wrappedAxios(parameters) {
+const wrappedAxios = async (parameters) => {
   try {
     const isGetMethod = parameters.method.toLowerCase() === 'get';
     const argPlacement = isGetMethod ? 'params' : 'data';
@@ -29,18 +29,18 @@ async function wrappedAxios(parameters) {
       };
     }
   }
-}
+};
 
 // The function accepts object with values
 // and checks whether they are non-empty strings
-function checkProperties(propertyList) {
+const checkProperties = (propertyList) => {
   for (const key in propertyList) {
     const value = propertyList[key];
     if (!value || typeof value !== 'string') {
       throw new Error(`${key} should be a non-empty string`);
     }
   }
-}
+};
 
 module.exports = {
   wrappedAxios,

@@ -2,7 +2,7 @@
 
 const CategoryServices = require('../services/CategoryServices');
 
-async function CategoryPage(req, res) {
+const categoryPage = async (req, res) => {
   try {
     const categoryName = req.params.id;
 
@@ -42,8 +42,8 @@ async function CategoryPage(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 module.exports = {
-  CategoryPage,
+  categoryPage,
 };

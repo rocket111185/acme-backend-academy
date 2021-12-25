@@ -42,7 +42,7 @@ const generateProperties = (variant, variantList) => {
 const eq = (first, second) => first === second;
 
 const urlencode = (key, value) =>
-  (value ? '?' + querystring.stringify({ [key]: value }) : '');
+  value ? '?' + querystring.stringify({ [key]: value }) : '';
 
 module.exports = {
   getSymbolFromCurrency,

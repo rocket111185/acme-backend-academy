@@ -2,7 +2,7 @@
 
 const { wrappedAxios, checkProperties } = require('./utils.js');
 
-async function fetchCart(token) {
+const fetchCart = async (token) => {
   checkProperties({ token });
 
   const response = await wrappedAxios({
@@ -14,9 +14,9 @@ async function fetchCart(token) {
   });
 
   return response;
-}
+};
 
-async function addItemToCart(token, productId, variantId, quantity = '1') {
+const addItemToCart = async (token, productId, variantId, quantity = '1') => {
   checkProperties({ token, productId, variantId, quantity });
 
   const response = await wrappedAxios({
@@ -33,9 +33,14 @@ async function addItemToCart(token, productId, variantId, quantity = '1') {
   });
 
   return response;
-}
+};
 
-async function changeCartItemQuantity(token, productId, variantId, quantity) {
+const changeCartItemQuantity = async (
+  token,
+  productId,
+  variantId,
+  quantity
+) => {
   checkProperties({ token, productId, variantId, quantity });
 
   const response = await wrappedAxios({
@@ -52,9 +57,9 @@ async function changeCartItemQuantity(token, productId, variantId, quantity) {
   });
 
   return response;
-}
+};
 
-async function removeItemFromCart(token, productId, variantId) {
+const removeItemFromCart = async (token, productId, variantId) => {
   checkProperties({ token, productId, variantId });
 
   const response = await wrappedAxios({
@@ -70,7 +75,7 @@ async function removeItemFromCart(token, productId, variantId) {
   });
 
   return response;
-}
+};
 
 module.exports = {
   fetchCart,

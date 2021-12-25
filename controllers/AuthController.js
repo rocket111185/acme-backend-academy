@@ -8,7 +8,7 @@ const cookieSettings = {
   httpOnly: true,
 };
 
-async function LoginPage(req, res) {
+const loginPage = async (req, res) => {
   try {
     if (!req.query.error && req.cookies.token) {
       req.query.error = 'Warning! You are already registered';
@@ -18,9 +18,9 @@ async function LoginPage(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function SignUp(req, res) {
+const signUp = async (req, res) => {
   try {
     const credentials = await AuthServices.signUp(req.body);
     const { redirect } = req.body;
@@ -40,9 +40,9 @@ async function SignUp(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function SignIn(req, res) {
+const signIn = async (req, res) => {
   try {
     const credentials = await AuthServices.signIn(req.body);
     const { redirect } = req.body;
@@ -62,9 +62,9 @@ async function SignIn(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function Logout(req, res) {
+const logout = async (req, res) => {
   try {
     const { redirect } = req.query;
 
@@ -75,11 +75,11 @@ async function Logout(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 module.exports = {
-  LoginPage,
-  SignUp,
-  SignIn,
-  Logout,
+  loginPage,
+  signUp,
+  signIn,
+  logout,
 };

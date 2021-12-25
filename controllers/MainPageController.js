@@ -2,7 +2,7 @@
 
 const CategoryServices = require('../services/CategoryServices');
 
-async function MainPage(req, res) {
+const mainPage = async (req, res) => {
   try {
     const header = await CategoryServices.fetchChildCategories();
     const { error } = header;
@@ -23,8 +23,8 @@ async function MainPage(req, res) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 module.exports = {
-  MainPage,
+  mainPage,
 };
