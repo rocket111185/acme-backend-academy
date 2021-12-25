@@ -7,11 +7,11 @@ const currentDirectory = basename(__dirname);
 const currentFile = basename(__filename);
 
 const files = readdirSync(currentDirectory).filter(
-    (file) => file !== currentFile
+  (file) => file !== currentFile
 );
 
 module.exports = (app) => {
-    for (const file of files) {
-        app.use('/', require(`./${file}`));
-    }
+  for (const file of files) {
+    app.use('/', require(`./${file}`));
+  }
 };

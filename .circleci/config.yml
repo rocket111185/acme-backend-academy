@@ -20,7 +20,6 @@ jobs:
       - run: npm ci
       - run: echo $SECRET_KEY
       - run: SECRET_KEY=$SECRET_KEY npm test
-    
 
 workflows:
   # Below is the definition of your workflow.
@@ -37,4 +36,4 @@ workflows:
           filters:
             branches:
               # This sample config runs this job on any branch matching the regex below, however, it's more likely you want to only run this job on master.
-              only: release  # Uncomment this line
+              only: release # Uncomment this line

@@ -3,42 +3,42 @@
 const { wrappedAxios, checkProperties } = require('./utils.js');
 
 async function fetchOrders(token) {
-    checkProperties({ token });
+  checkProperties({ token });
 
-    const response = await wrappedAxios({
-        method: 'get',
-        url: '/orders',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+  const response = await wrappedAxios({
+    method: 'get',
+    url: '/orders',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-    return response;
+  return response;
 }
 
 async function createOrder(token, address, paymentId, items) {
-    checkProperties({ token, address, paymentId });
-    if (!items?.length) {
-        throw new Error('The order cannot be created with no items');
-    }
+  checkProperties({ token, address, paymentId });
+  if (!items?.length) {
+    throw new Error('The order cannot be created with no items');
+  }
 
-    const response = await wrappedAxios({
-        method: 'post',
-        url: '/orders',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-        data: {
-            address,
-            paymentId,
-            items,
-        },
-    });
+  const response = await wrappedAxios({
+    method: 'post',
+    url: '/orders',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      address,
+      paymentId,
+      items,
+    },
+  });
 
-    return response;
+  return response;
 }
 
 module.exports = {
-    fetchOrders,
-    createOrder,
+  fetchOrders,
+  createOrder,
 };

@@ -1,4 +1,5 @@
 # acme-backend-academy
+
 This is a solution project for the 2021 June ACME Internship Program
 
 ## dotenv
@@ -46,7 +47,6 @@ Both commands are equal.
 
 Test files are in `tests`. They contain useful tricks and jokes
 which are supposed to be funny.
-
 
 ### Author
 

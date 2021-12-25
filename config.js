@@ -7,9 +7,9 @@ const SENTRY_KEY = 'fb68865d8a924811b03b28eaa6d5cff9@o923734.ingest';
 const SENTRY_PROJECT_ID = '5871387';
 
 module.exports = {
-    ROOT_CATEGORY,
-    SECRET_KEY,
-    API_URL,
-    SENTRY_KEY,
-    SENTRY_PROJECT_ID,
+  ROOT_CATEGORY,
+  SECRET_KEY,
+  API_URL,
+  SENTRY_KEY,
+  SENTRY_PROJECT_ID,
 };
