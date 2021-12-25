@@ -2,38 +2,38 @@
 
 const { wrappedAxios, checkProperties } = require('./utils.js');
 
-async function signUp({ name, email, password }) {
-    checkProperties({ name, email, password });
+const signUp = async ({ name, email, password }) => {
+  checkProperties({ name, email, password });
 
-    const response = await wrappedAxios({
-        method: 'post',
-        url: '/auth/signup',
-        data: {
-            name,
-            email,
-            password,
-        },
-    });
+  const response = await wrappedAxios({
+    method: 'post',
+    url: '/auth/signup',
+    data: {
+      name,
+      email,
+      password,
+    },
+  });
 
-    return response;
-}
+  return response;
+};
 
-async function signIn({ email, password }) {
-    checkProperties({ email, password });
+const signIn = async ({ email, password }) => {
+  checkProperties({ email, password });
 
-    const response = await wrappedAxios({
-        method: 'post',
-        url: '/auth/signin',
-        data: {
-            email,
-            password,
-        },
-    });
+  const response = await wrappedAxios({
+    method: 'post',
+    url: '/auth/signin',
+    data: {
+      email,
+      password,
+    },
+  });
 
-    return response;
-}
+  return response;
+};
 
 module.exports = {
-    signUp,
-    signIn,
+  signUp,
+  signIn,
 };

@@ -2,84 +2,89 @@
 
 const { wrappedAxios, checkProperties } = require('./utils.js');
 
-async function fetchWishlist(token) {
-    checkProperties({ token });
+const fetchWishlist = async (token) => {
+  checkProperties({ token });
 
-    const response = await wrappedAxios({
-        method: 'get',
-        url: '/wishlist',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+  const response = await wrappedAxios({
+    method: 'get',
+    url: '/wishlist',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-    return response;
-}
+  return response;
+};
 
-async function addItemToWishlist(token, productId, variantId, quantity = '1') {
-    checkProperties({ token, productId, variantId, quantity });
+const addItemToWishlist = async (
+  token,
+  productId,
+  variantId,
+  quantity = '1'
+) => {
+  checkProperties({ token, productId, variantId, quantity });
 
-    const response = await wrappedAxios({
-        method: 'post',
-        url: '/wishlist/addItem',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-        data: {
-            productId,
-            variantId,
-            quantity,
-        },
-    });
+  const response = await wrappedAxios({
+    method: 'post',
+    url: '/wishlist/addItem',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      productId,
+      variantId,
+      quantity,
+    },
+  });
 
-    return response;
-}
+  return response;
+};
 
-async function changeWishlistItemQuantity(
-    token,
-    productId,
-    variantId,
-    quantity
-) {
-    checkProperties({ token, productId, variantId, quantity });
+const changeWishlistItemQuantity = async (
+  token,
+  productId,
+  variantId,
+  quantity
+) => {
+  checkProperties({ token, productId, variantId, quantity });
 
-    const response = await wrappedAxios({
-        method: 'post',
-        url: '/wishlist/changeItemQuantity',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-        data: {
-            productId,
-            variantId,
-            quantity,
-        },
-    });
+  const response = await wrappedAxios({
+    method: 'post',
+    url: '/wishlist/changeItemQuantity',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      productId,
+      variantId,
+      quantity,
+    },
+  });
 
-    return response;
-}
+  return response;
+};
 
-async function removeItemFromWishlist(token, productId, variantId) {
-    checkProperties({ token, productId, variantId });
+const removeItemFromWishlist = async (token, productId, variantId) => {
+  checkProperties({ token, productId, variantId });
 
-    const response = await wrappedAxios({
-        method: 'delete',
-        url: '/wishlist/removeItem',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-        data: {
-            productId,
-            variantId,
-        },
-    });
+  const response = await wrappedAxios({
+    method: 'delete',
+    url: '/wishlist/removeItem',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      productId,
+      variantId,
+    },
+  });
 
-    return response;
-}
+  return response;
+};
 
 module.exports = {
-    fetchWishlist,
-    addItemToWishlist,
-    changeWishlistItemQuantity,
-    removeItemFromWishlist,
+  fetchWishlist,
+  addItemToWishlist,
+  changeWishlistItemQuantity,
+  removeItemFromWishlist,
 };

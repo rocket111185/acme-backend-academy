@@ -2,40 +2,40 @@
 
 const ItemServices = require('../services/ItemServices');
 
-async function generateCompleteItemList(itemlist) {
-    const result = [];
+const generateCompleteItemList = async (itemlist) => {
+  const result = [];
 
-    for (const element of itemlist) {
-        const item = await ItemServices.fetchItem(element.productId);
-        for (const key in element) {
-            item[key] = element[key];
-        }
-        result.push(item);
+  for (const element of itemlist) {
+    const item = await ItemServices.fetchItem(element.productId);
+    for (const key in element) {
+      item[key] = element[key];
     }
+    result.push(item);
+  }
 
-    return result;
-}
+  return result;
+};
 
-async function findVariantId(item) {
-    const { productId } = item;
-    const { variants } = await ItemServices.fetchItem(productId);
+const findVariantId = async (item) => {
+  const { productId } = item;
+  const { variants } = await ItemServices.fetchItem(productId);
 
-    for (const variant of variants) {
-        let found = true;
-        const variations = variant.variation_values;
-        for (const property in variations) {
-            if (variations[property] !== item[property]) {
-                found = false;
-                break;
-            }
-        }
-        if (found) {
-            return variant.product_id;
-        }
+  for (const variant of variants) {
+    let found = true;
+    const variations = variant.variation_values;
+    for (const property in variations) {
+      if (variations[property] !== item[property]) {
+        found = false;
+        break;
+      }
     }
-}
+    if (found) {
+      return variant.product_id;
+    }
+  }
+};
 
 module.exports = {
-    generateCompleteItemList,
-    findVariantId,
+  generateCompleteItemList,
+  findVariantId,
 };

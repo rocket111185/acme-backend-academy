@@ -1,32 +1,33 @@
 {
-    "name": "osf-backend-academy",
-    "version": "0.2.0",
-    "description": "OSF Backend Academy Project",
-    "main": "index.js",
-    "scripts": {
-        "dev": "nodemon -r dotenv/config index.js -w index.js -w controllers -w routes -w services",
-        "lint": "find . -path ./node_modules -prune -false -o -name '*.js' -o -name '*.json' | xargs -I{} npx prettier -w --check {} && npx eslint --fix .",
-        "start": "node -r dotenv/config index.js",
-        "test": "jest"
-    },
-    "author": "Rekechynsky Dmytro",
-    "license": "MIT",
-    "dependencies": {
-        "@sentry/node": "^6.9.0",
-        "@sentry/tracing": "^6.9.0",
-        "axios": "^0.21.1",
-        "body-parser": "^1.19.0",
-        "cookie-parser": "^1.4.5",
-        "currency-symbol-map": "^5.0.1",
-        "dotenv": "^10.0.0",
-        "express": "^4.17.1",
-        "express-handlebars": "^5.3.2"
-    },
-    "devDependencies": {
-        "eslint": "^7.30.0",
-        "jest": "^27.0.6",
-        "nodemon": "^2.0.4",
-        "prettier": "^2.3.2",
-        "watch": "^0.13.0"
-    }
+  "name": "osf-backend-academy",
+  "version": "0.2.0",
+  "description": "ACME Backend Academy Project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config index.js -w index.js -w controllers -w routes -w services",
+    "lint": "eslint . && prettier -c \"**/*.js\" \"**/*.json\" \"**/*.md\" \"**/*.yml\" \"**/*.ts\"",
+    "fmt": "prettier --write \"**/*.js\" \"**/*.json\" \"**/*.md\" \"**/*.yml\"",
+    "start": "node -r dotenv/config index.js",
+    "test": "jest"
+  },
+  "author": "Rekechynsky Dmytro",
+  "license": "MIT",
+  "dependencies": {
+    "@sentry/node": "^6.9.0",
+    "@sentry/tracing": "^6.9.0",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "currency-symbol-map": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.30.0",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.3.2",
+    "watch": "^0.13.0"
+  }
 }

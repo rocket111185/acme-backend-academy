@@ -3,89 +3,84 @@
 const CategoryServices = require('../services/CategoryServices');
 const ItemServices = require('../services/ItemServices');
 
-async function ItemListPage(req, res) {
-    try {
-        const categoryName = req.params.id;
-        const pageNumber = req.query.page;
+const itemListPage = async (req, res) => {
+  try {
+    const categoryName = req.params.id;
+    const pageNumber = req.query.page;
 
-        const itemlist = await ItemServices.fetchItemList(
-            categoryName,
-            pageNumber
-        );
-        const { error } = itemlist;
+    const itemlist = await ItemServices.fetchItemList(categoryName, pageNumber);
+    const { error } = itemlist;
 
-        if (error) {
-            return res.render('error', {
-                error,
-                reasons: [
-                    'There are no products for this category',
-                    `There is no category "${categoryName}"`,
-                    'The Internet connection is unstable',
-                ],
-            });
-        }
-
-        const header = await CategoryServices.fetchChildCategories();
-        const currentCategory = await CategoryServices.fetchCategory(
-            categoryName
-        );
-
-        const { token } = req.cookies;
-        const redirect = req.originalUrl.split('?').shift();
-
-        res.render('itemlist', {
-            header,
-            currentCategory,
-            itemlist,
-            token,
-            redirect,
-        });
-    } catch (error) {
-        console.error(error);
+    if (error) {
+      return res.render('error', {
+        error,
+        reasons: [
+          'There are no products for this category',
+          `There is no category "${categoryName}"`,
+          'The Internet connection is unstable',
+        ],
+      });
     }
-}
 
-async function ItemPage(req, res) {
-    try {
-        const itemId = req.params.id;
+    const header = await CategoryServices.fetchChildCategories();
+    const currentCategory = await CategoryServices.fetchCategory(categoryName);
 
-        const item = await ItemServices.fetchItem(itemId);
+    const { token } = req.cookies;
+    const redirect = req.originalUrl.split('?').shift();
 
-        if (item.error) {
-            const { error } = item;
-            return res.render('error', {
-                error,
-                reasons: [
-                    `There is no item with id "${itemId}"`,
-                    'The Internet connection is unstable',
-                ],
-            });
-        }
+    res.render('itemlist', {
+      header,
+      currentCategory,
+      itemlist,
+      token,
+      redirect,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-        const category = await CategoryServices.fetchCategory(
-            item.primary_category_id
-        );
-        const header = await CategoryServices.fetchChildCategories();
+const itemPage = async (req, res) => {
+  try {
+    const itemId = req.params.id;
 
-        const { token } = req.cookies;
-        const redirect = req.originalUrl.split('?').shift();
-        const { error, success } = req.query;
+    const item = await ItemServices.fetchItem(itemId);
 
-        res.render('item', {
-            header,
-            category,
-            item,
-            token,
-            redirect,
-            error,
-            success,
-        });
-    } catch (error) {
-        console.error(error);
+    if (item.error) {
+      const { error } = item;
+      return res.render('error', {
+        error,
+        reasons: [
+          `There is no item with id "${itemId}"`,
+          'The Internet connection is unstable',
+        ],
+      });
     }
-}
+
+    const category = await CategoryServices.fetchCategory(
+      item.primary_category_id
+    );
+    const header = await CategoryServices.fetchChildCategories();
+
+    const { token } = req.cookies;
+    const redirect = req.originalUrl.split('?').shift();
+    const { error, success } = req.query;
+
+    res.render('item', {
+      header,
+      category,
+      item,
+      token,
+      redirect,
+      error,
+      success,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 module.exports = {
-    ItemListPage,
-    ItemPage,
+  itemListPage,
+  itemPage,
 };
