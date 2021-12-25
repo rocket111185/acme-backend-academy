@@ -2,15 +2,14 @@
 
 This is a solution project for the 2021 June ACME Internship Program
 
-## dotenv
+## Environmental properties
 
-Write this into `.env` file:
+You should set the following properties:
 
-```
-SECRET_KEY=empty
-```
-
-Replace existing values with proper.
+* SECRET_KEY (The secret key for access to API)
+* API_URL (the API should have scheme similar to Salesforce OCAPI)
+* SENTRY_KEY (The key for Sentry monitoring system)
+* SENTRY_PROJECT_ID (The project ID for Sentry monitoring system)
 
 ## Useful commands
 
