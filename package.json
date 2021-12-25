@@ -1,7 +1,7 @@
 {
     "name": "osf-backend-academy",
     "version": "0.2.0",
-    "description": "OSF Backend Academy Project",
+    "description": "ACME Backend Academy Project",
     "main": "index.js",
     "scripts": {
         "dev": "nodemon -r dotenv/config index.js -w index.js -w controllers -w routes -w services",
